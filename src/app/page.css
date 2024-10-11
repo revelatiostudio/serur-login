@@ -115,13 +115,38 @@
     margin-left: 1rem;
 }
 
+
 .eficiencia{
     width: 100%;
     max-width: 24.0625rem;
     height: 12.875rem;
     background-color: var(--color-verde-medio);
     border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+.eficiencia .eficiencia-div{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 19.8125rem;
+    margin-top: 2.1875rem;
+}
+
+.eficiencia .eficiencia-text{
+    width: 100%;
+    max-width: 317px;
+    align-items: end;
+    margin-top: 16px;
+}
+.eficiencia .eficiencia-text h2{
+    font-size: 33.5px;
+    font-weight: 400;
+    line-height: 150%;
+}
+
+
 .seguro{
     width: 100%;
     max-width: 24.0625rem;
@@ -129,5 +154,29 @@
     background-color: var(--color-verde-escuro);
     border-radius: 30px;
     margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
+}
+
+.seguro .seguro-div{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 19.8125rem;
+    margin-top: 2.1875rem;
+}
+
+.seguro .seguro-text{
+    width: 100%;
+    max-width: 19.8125rem;
+    align-items: end;
+    margin-top: 1.125rem;
+}
+
+.seguro .seguro-text h2{
+    font-size: 33.5px;
+    font-weight: 400;
+    line-height: 150%;
 }

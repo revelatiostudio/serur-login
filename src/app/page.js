@@ -4,6 +4,8 @@ import sophiaLogo from '../assets/sophiaLogo.svg'
 import serur from '../assets/serur.svg'
 import relogio from '../assets/relogio.svg'
 import setap from '../assets/setap.svg'
+import crescente from '../assets/crescente.svg'
+import cadeado from '../assets/cadeado.svg'
 import Image from 'next/image'
 
 export default function Home() {
@@ -78,9 +80,45 @@ export default function Home() {
 
           <div className="divisao">
             <div className="eficiencia">
+              <div className="eficiencia-div">
+                <Image
+                  src={crescente}
+                  width={67}
+                  height={67}
+                  alt="logo relogio" />
+
+                <Image
+                  src={setap}
+                  width={33}
+                  height={33}
+                  alt="seta" />
+
+              </div>
+              <div className="eficiencia-text">
+                <h2>Eficiente</h2>
+
+              </div>
 
             </div>
             <div className="seguro">
+              <div className="seguro-div">
+                <Image
+                  src={cadeado}
+                  width={67}
+                  height={67}
+                  alt="logo relogio" />
+
+                <Image
+                  src={setap}
+                  width={33}
+                  height={33}
+                  alt="seta" />
+
+              </div>
+              <div className="seguro-text">
+                <h2>Seguro</h2>
+
+              </div>
 
             </div>
 

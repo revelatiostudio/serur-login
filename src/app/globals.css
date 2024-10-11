@@ -16,3 +16,9 @@
   padding: 0px 30px;
   position: relative;
 } */
+
+:root{
+  --color-black: #000000;
+  --color-gray: #151515;
+  --color-gray-texts: #D4D4D8
+}

@@ -73,15 +73,15 @@
 }
 .sec-opcoes .opcoes{
     width: 100%;
-    max-width: 789px;
-    height: 853px;
+    max-width: 49.3125rem;
+    height: 53.3125rem;
     display: flex;
 }
 
 .agil{
     width: 100%;
-    max-width: 385px;
-    height: 430px;
+    max-width: 24.0625rem;
+    height: 26.875rem;
     background-color: var(--color-verde-claro);
     border-radius: 30px;
     display: flex;
@@ -93,7 +93,7 @@
     width: 100%;
     max-width: 317px;
     align-items: end;
-    margin-top: 208px;
+    margin-top: 13rem;
 }
 .agil .agil-text h2{
     font-size: 67px;
@@ -104,30 +104,30 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    max-width: 317px;
-    margin-top: 35px;
+    max-width: 19.8125rem;
+    margin-top: 2.1875rem;
 }
 .divisao{
     width: 100%;
-    max-width: 385px;
+    max-width: 24.0625rem;
     display: flex;
     flex-direction: column;
-    margin-left: 16px;
+    margin-left: 1rem;
 }
 
 .eficiencia{
     width: 100%;
-    max-width: 385px;
-    height: 206px;
+    max-width: 24.0625rem;
+    height: 12.875rem;
     background-color: var(--color-verde-medio);
     border-radius: 30px;
 }
 .seguro{
     width: 100%;
-    max-width: 385px;
-    height: 206px;
+    max-width: 24.0625rem;
+    height: 12.875rem;
     background-color: var(--color-verde-escuro);
     border-radius: 30px;
-    margin-top: 16px;
+    margin-top: 1rem;
 
 }

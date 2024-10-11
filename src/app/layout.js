@@ -1,4 +1,5 @@
 import "./globals.css";
+import Preline from "./Preline";
 
 export default function RootLayout({ children }) {
   return (
@@ -6,6 +7,7 @@ export default function RootLayout({ children }) {
       <body>
         {children}
       </body>
+      <Preline/>
     </html>
   );
 }

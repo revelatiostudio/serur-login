@@ -20,5 +20,9 @@
 :root{
   --color-black: #000000;
   --color-gray: #151515;
-  --color-gray-texts: #D4D4D8
+  --color-gray-texts: #D4D4D8;
+  --color-verde-claro: #C6F432
+}
+a{
+  cursor: pointer;
 }

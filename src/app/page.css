@@ -12,7 +12,6 @@
     color: var(--color-gray-texts);
 }
 .sec-login .login{
-    border: 2px red solid;
     width: 100%;
     max-width: 36.375rem;
     height: 45.125rem;
@@ -28,6 +27,38 @@
     font-size: 19px;
     font-weight: 300;
     line-height: 44px;
+}
+.sec-campos{
+    width: 528px;
+}
+.sec-campos p{
+    text-align: end;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 133%;
+    margin-top: 13px;
+    right: 0;
+
+}
+
+.campos-btn{
+    width: 100%;
+    max-width: 528px;
+    height: 67px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10.986px;
+    color: var(--color-black);
+    background-color: var(--color-verde-claro);
+    margin-top: 32px;
+}
+.p2{
+    margin-top: 10px;
+}
+.p2 a{
+    color: var(--color-verde-claro);
+    cursor: pointer;
 }
 
 

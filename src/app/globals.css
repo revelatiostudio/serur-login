@@ -21,7 +21,9 @@
   --color-black: #000000;
   --color-gray: #151515;
   --color-gray-texts: #D4D4D8;
-  --color-verde-claro: #C6F432
+  --color-verde-claro: #C6F432;
+  --color-verde-medio: #ACCA4A;
+  --color-verde-escuro: #8EA055;
 }
 a{
   cursor: pointer;

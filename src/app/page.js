@@ -1,3 +1,4 @@
+'use client'
 import "./page.css";
 
 import sophiaLogo from '../assets/sophiaLogo.svg'
@@ -10,48 +11,120 @@ import ia from '../assets/ia.svg'
 import dots from '../assets/dots.svg'
 import msg from '../assets/msg.svg'
 import Image from 'next/image'
+import { useState } from "react";
 
 export default function Home() {
+
+  const [temLogin, setTemLogin] = useState(true)
+
+  function Login() {
+    return (
+      <div className="login">
+        <Image
+          src={sophiaLogo}
+          width={166}
+          height={44}
+          alt="sophia logo"
+        />
+        <div className="p-text">
+          <p>Preencha os campos abaixo</p>
+        </div>
+
+        <div className="sec-campos">
+          <div class="w-full">
+            <label for="input-label" class="block text-[18px] text-sm font-medium mb-2 dark:text-white">Email</label>
+            <input required type="email" id="input-label" class="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******@gmail.com" />
+          </div>
+          <div class="w-full mt-4 ">
+            <label for="input-label" class="block text-[18px] text-sm font-medium mb-2 dark:text-white">Senha</label>
+            <input required type="email" id="input-label" class="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******" />
+          </div>
+          <p><a>Esqueceu a senha?</a></p>
+        </div>
+
+        <div className="campos-btn">
+          <button>Continuar</button>
+        </div>
+        <p className="p2">Não tem conta? <a onClick={() => { setTemLogin(false) }}>Solicitar</a></p>
+
+        <Image
+          style={{ marginTop: '150px' }}
+          src={serur}
+          width={166}
+          height={44}
+          alt="serur logo"
+        />
+
+      </div>
+
+    )
+
+  }
+
+  function Cadastro() {
+    return (
+      <div className="login">
+        <Image
+          src={sophiaLogo}
+          width={166}
+          height={44}
+          alt="sophia logo"
+        />
+        <div className="p-text cadastro">
+          <p>Preencha os campos abaixo</p>
+        </div>
+
+        <div className="sec-campos">
+
+          <div class="w-full">
+            <label for="input-label" class="block text-[18px] text-sm font-medium mb-2 dark:text-white">Nome</label>
+            <input required type="email" id="input-label" class="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Nome" />
+          </div>
+
+          <div class="w-full mt-4">
+            <label for="input-label" class="block text-[18px] text-sm font-medium mb-2 dark:text-white">Email</label>
+            <input required type="email" id="input-label" class="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******@gmail.com" />
+          </div>
+
+          <div class="w-full mt-4 ">
+            <label for="input-label" class="block text-[18px] text-sm font-medium mb-2 dark:text-white">Senha</label>
+            <input required type="email" id="input-label" class="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******" />
+          </div>
+
+          <div class="w-full mt-4">
+            <label for="input-label" class="block text-[18px] text-sm font-medium mb-2 dark:text-white">Token</label>
+            <input required type="email" id="input-label" class="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******" />
+          </div>
+
+        </div>
+
+        <div className="campos-btn">
+          <button>Continuar</button>
+        </div>
+        <p className="p2">Já tem conta? <a onClick={() => { setTemLogin(true) }}>Acesso</a></p>
+
+        <Image
+          style={{ marginTop: '40px' }}
+          src={serur}
+          width={166}
+          height={44}
+          alt="serur logo"
+        />
+
+      </div>
+    )
+
+  }
   return (
     <section className="container-cadastros">
       <div className="sec-login">
-        <div className="login">
-          <Image
-            src={sophiaLogo}
-            width={166}
-            height={44}
-            alt="sophia logo"
-          />
-          <div className="p-text">
-            <p>Preencha os campos abaixo</p>
-          </div>
+        {temLogin ?
+          <Login />
+          :
+          <Cadastro />
 
-          <div className="sec-campos">
-            <div class="w-full">
-              <label for="input-label" class="block text-sm font-medium mb-2 dark:text-white">Email</label>
-              <input type="email" id="input-label" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******@gmail.com" />
-            </div>
-            <div class="w-full mt-4 ">
-              <label for="input-label" class="block text-sm font-medium mb-2 dark:text-white">Senha</label>
-              <input type="email" id="input-label" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******" />
-            </div>
-            <p><a>Esqueceu a senha?</a></p>
-          </div>
+        }
 
-          <div className="campos-btn">
-            <button>Continuar</button>
-          </div>
-          <p className="p2">Não tem conta? <a>Solicitar</a></p>
-
-          <Image
-            style={{ marginTop: '150px' }}
-            src={serur}
-            width={166}
-            height={44}
-            alt="serur logo"
-          />
-
-        </div>
 
       </div>
       <div className="sec-opcoes">
@@ -126,7 +199,6 @@ export default function Home() {
 
           </div>
 
-
         </div>
         <div className="min-cards">
           <div className="card">
@@ -140,7 +212,7 @@ export default function Home() {
             <Image src={dots} width={30} height={30} />
           </div>
 
-            
+
         </div>
 
       </div>

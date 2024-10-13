@@ -16,7 +16,7 @@
 .sec-login .login {
     width: 100%;
     max-width: 36.375rem;
-    height: 45.125rem;
+    /* height: 45.125rem; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -25,6 +25,11 @@
 
 .p-text {
     margin-top: 25px;
+    margin-bottom: 81px;
+}
+.p-text.cadastro {
+    margin-top: 25px;
+    margin-bottom: 36px;
 }
 
 .p-text p {
@@ -199,7 +204,7 @@
 .min-cards {
     width: 100%;
     max-width: 49.3125rem;
-    margin-top: 243px;
+    margin-top: 200px;
  
 }
 .min-cards p {

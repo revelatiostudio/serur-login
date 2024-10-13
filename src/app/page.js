@@ -15,7 +15,8 @@ import { useState } from "react";
 
 export default function Home() {
 
-  const [temLogin, setTemLogin] = useState(true)
+  const [temLogin, setTemLogin] = useState(true);
+  const [mostrarRecuperarSenha, setMostrarRecuperarSenha] = useState(false);
 
   function Login() {
     return (
@@ -39,7 +40,7 @@ export default function Home() {
             <label for="input-label" class="block text-[18px] text-sm font-medium mb-2 dark:text-white">Senha</label>
             <input required type="email" id="input-label" class="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******" />
           </div>
-          <p><a>Esqueceu a senha?</a></p>
+          <p><a onClick={() => { setMostrarRecuperarSenha(true) }}>Esqueceu a senha?</a></p>
         </div>
 
         <div className="campos-btn">
@@ -115,16 +116,53 @@ export default function Home() {
     )
 
   }
+
+  function RecuperarSenha() {
+    return (
+      <div className="login">
+        <Image
+          src={sophiaLogo}
+          width={166}
+          height={44}
+          alt="sophia logo"
+        />
+        <div className="p-text">
+          <p>Preencha os campos abaixo</p>
+        </div>
+
+        <div className="sec-campos">
+          <div class="w-full mt-4">
+            <label for="input-label" class="block text-[18px] text-sm font-medium mb-2 dark:text-white">Email</label>
+            <input required type="email" id="input-label" class="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******@gmail.com" />
+          </div>
+        </div>
+
+        <div className="campos-btn">
+          <button>Continuar</button>
+        </div>
+        <p className="p2">Lembrou sua senha? <a onClick={() => { setMostrarRecuperarSenha(false) }}>Acesso</a></p>
+
+        <Image
+          style={{ marginTop: '150px' }}
+          src={serur}
+          width={166}
+          height={44}
+          alt="serur logo"
+        />
+
+      </div>
+    )
+  }
   return (
     <section className="container-cadastros">
       <div className="sec-login">
-        {temLogin ?
+        {mostrarRecuperarSenha ? (
+          <RecuperarSenha />
+        ) : temLogin ? (
           <Login />
-          :
+        ) : (
           <Cadastro />
-
-        }
-
+        )}
 
       </div>
       <div className="sec-opcoes">

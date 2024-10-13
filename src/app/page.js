@@ -6,6 +6,9 @@ import relogio from '../assets/relogio.svg'
 import setap from '../assets/setap.svg'
 import crescente from '../assets/crescente.svg'
 import cadeado from '../assets/cadeado.svg'
+import ia from '../assets/ia.svg'
+import dots from '../assets/dots.svg'
+import msg from '../assets/msg.svg'
 import Image from 'next/image'
 
 export default function Home() {
@@ -77,7 +80,6 @@ export default function Home() {
 
           </div>
 
-
           <div className="divisao">
             <div className="eficiencia">
               <div className="eficiencia-div">
@@ -125,6 +127,20 @@ export default function Home() {
           </div>
 
 
+        </div>
+        <div className="min-cards">
+          <div className="card">
+            <Image src={ia} width={44} height={44} />
+            <p>IA que valida inicial e contestação com rapidez e precisão.</p>
+            <Image src={dots} width={30} height={30} />
+          </div>
+          <div className="card">
+            <Image src={msg} width={44} height={44} />
+            <p>Verificação automática de OAB e documentos de forma confiável.</p>
+            <Image src={dots} width={30} height={30} />
+          </div>
+
+            
         </div>
 
       </div>

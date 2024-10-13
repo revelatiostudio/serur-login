@@ -1,9 +1,10 @@
-.container-cadastros{
+.container-cadastros {
     width: 100%;
     height: 100vh;
     display: flex;
 }
-.sec-login{
+
+.sec-login {
     width: 50%;
     background-color: var(--color-black);
     display: flex;
@@ -11,7 +12,8 @@
     justify-content: center;
     color: var(--color-gray-texts);
 }
-.sec-login .login{
+
+.sec-login .login {
     width: 100%;
     max-width: 36.375rem;
     height: 45.125rem;
@@ -20,18 +22,22 @@
     align-items: center;
     padding-bottom: 25px;
 }
-.p-text{
+
+.p-text {
     margin-top: 25px;
 }
-.p-text p{
+
+.p-text p {
     font-size: 19px;
     font-weight: 300;
     line-height: 44px;
 }
-.sec-campos{
+
+.sec-campos {
     width: 528px;
 }
-.sec-campos p{
+
+.sec-campos p {
     text-align: end;
     font-size: 13px;
     font-weight: 500;
@@ -41,7 +47,7 @@
 
 }
 
-.campos-btn{
+.campos-btn {
     width: 100%;
     max-width: 528px;
     height: 67px;
@@ -53,10 +59,12 @@
     background-color: var(--color-verde-claro);
     margin-top: 32px;
 }
-.p2{
+
+.p2 {
     margin-top: 10px;
 }
-.p2 a{
+
+.p2 a {
     color: var(--color-verde-claro);
     cursor: pointer;
 }
@@ -64,21 +72,22 @@
 
 
 
-.sec-opcoes{
+.sec-opcoes {
     width: 50%;
     background-color: var(--color-gray);
     display: flex;
     align-items: center;
-    justify-content: center;
-}
-.sec-opcoes .opcoes{
-    width: 100%;
-    max-width: 49.3125rem;
-    height: 53.3125rem;
-    display: flex;
+    flex-direction: column;
 }
 
-.agil{
+.sec-opcoes .opcoes {
+    width: 100%;
+    max-width: 49.3125rem;
+    display: flex;
+    margin-top: 5.125rem;
+}
+
+.agil {
     width: 100%;
     max-width: 24.0625rem;
     height: 26.875rem;
@@ -89,25 +98,29 @@
     align-items: center;
 
 }
-.agil .agil-text{
+
+.agil .agil-text {
     width: 100%;
     max-width: 317px;
     align-items: end;
     margin-top: 13rem;
 }
-.agil .agil-text h2{
+
+.agil .agil-text h2 {
     font-size: 67px;
     font-weight: 400;
     line-height: 125%;
 }
-.agil .agil-div{
+
+.agil .agil-div {
     display: flex;
     justify-content: space-between;
     width: 100%;
     max-width: 19.8125rem;
     margin-top: 2.1875rem;
 }
-.divisao{
+
+.divisao {
     width: 100%;
     max-width: 24.0625rem;
     display: flex;
@@ -116,7 +129,7 @@
 }
 
 
-.eficiencia{
+.eficiencia {
     width: 100%;
     max-width: 24.0625rem;
     height: 12.875rem;
@@ -126,7 +139,8 @@
     flex-direction: column;
     align-items: center;
 }
-.eficiencia .eficiencia-div{
+
+.eficiencia .eficiencia-div {
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -134,20 +148,21 @@
     margin-top: 2.1875rem;
 }
 
-.eficiencia .eficiencia-text{
+.eficiencia .eficiencia-text {
     width: 100%;
     max-width: 317px;
     align-items: end;
     margin-top: 16px;
 }
-.eficiencia .eficiencia-text h2{
+
+.eficiencia .eficiencia-text h2 {
     font-size: 33.5px;
     font-weight: 400;
     line-height: 150%;
 }
 
 
-.seguro{
+.seguro {
     width: 100%;
     max-width: 24.0625rem;
     height: 12.875rem;
@@ -160,7 +175,7 @@
 
 }
 
-.seguro .seguro-div{
+.seguro .seguro-div {
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -168,15 +183,45 @@
     margin-top: 2.1875rem;
 }
 
-.seguro .seguro-text{
+.seguro .seguro-text {
     width: 100%;
     max-width: 19.8125rem;
     align-items: end;
     margin-top: 1.125rem;
 }
 
-.seguro .seguro-text h2{
+.seguro .seguro-text h2 {
     font-size: 33.5px;
     font-weight: 400;
     line-height: 150%;
+}
+
+.min-cards {
+    width: 100%;
+    max-width: 49.3125rem;
+    margin-top: 243px;
+ 
+}
+.min-cards p {
+    width: 100%;
+    max-width: 49.3125rem;
+    color: var(--color-white);
+    font-size: 20px;
+    line-height: 95%;
+    opacity: 0.75;
+    padding-left: 19px;
+ 
+ 
+}
+.min-cards .card {
+    width: 100%;
+    max-width: 49.3125rem;
+    height: 84px;
+    border-radius: 15px;
+    border: 1.243px solid rgba(255, 255, 255, 0.10);
+    background: #171717;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    margin-bottom: 10px;
 }

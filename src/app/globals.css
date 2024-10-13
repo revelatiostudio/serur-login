@@ -24,6 +24,7 @@
   --color-verde-claro: #C6F432;
   --color-verde-medio: #ACCA4A;
   --color-verde-escuro: #8EA055;
+  --color-white: #FFF;
 }
 a{
   cursor: pointer;

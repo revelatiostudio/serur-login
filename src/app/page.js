@@ -13,7 +13,9 @@ import msg from '../assets/msg.svg'
 import Image from 'next/image'
 import { useRef, useState } from "react";
 
-import { mandaDadosCadastro } from './services/servicoCadastro.js'
+import { mandaDadosCadastro } from './services/servicoCadastro.js';
+import { loginUsuario } from './services/servicoLogin.js'
+import { esqueciSenha } from './services/serviceEsqueciSenha.js'
 
 export default function Home() {
 
@@ -33,9 +35,8 @@ export default function Home() {
     const token = tokenRef.current.value;
 
     const response = await mandaDadosCadastro({nome, email, senha, token});
-    if(response.status === 201){
-      return alert("Cadastrado com sucesso!")
-    }
+    if(response.status === 201) return alert("Cadastrado com sucesso!")
+    
 
     nomeRef.current.value = "";
     emailRef.current.value = "";
@@ -43,12 +44,25 @@ export default function Home() {
     tokenRef.current.value = "";
   }
 
-  function gerenciaLogin() {
+  async function gerenciaLogin() {
     const email = emailRef.current.value;
     const senha = senhaRef.current.value;
+    const response = await loginUsuario({email, senha});
+    if(response.status === 201) return alert("Logado com sucesso!")
+
     emailRef.current.value = "";
     senhaRef.current.value = "";
   }
+
+  async function gerenciaEsqueciSenha() {
+    const email = emailRef.current.value;
+
+    const response = await esqueciSenha({email});
+
+    if(response.status === 200) return alert("Enviamos um email para resetar sua senha.")
+    
+  }
+
   function Login() {
     return (
       <div className="login">
@@ -77,7 +91,7 @@ export default function Home() {
             <input 
               required 
               ref={senhaRef}
-              type="email" 
+              type="password" 
               id="input-senhal" 
               className="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******" />
           </div>
@@ -199,12 +213,12 @@ export default function Home() {
         <div className="sec-campos">
           <div className="w-full mt-4">
             <label htmlFor="input-label" className="block text-[18px] text-sm font-medium mb-2 dark:text-white">Email</label>
-            <input required type="email" id="input-emaile" className="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******@gmail.com" />
+            <input required ref={emailRef} type="email" id="input-emaile" className="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******@gmail.com" />
           </div>
         </div>
 
-        <div className="campos-btn">
-          <button>Continuar</button>
+        <div className="campos-btn" onClick={gerenciaEsqueciSenha}>
+          <button type="submit">Continuar</button>
         </div>
         <p className="p2">Lembrou sua senha? <a onClick={() => { setMostrarRecuperarSenha(false) }}>Acesso</a></p>
 

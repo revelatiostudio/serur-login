@@ -11,7 +11,7 @@ async function mandaDadosCadastro({nome, email, senha, token}) {
         return response
         
     } catch (error) {
-        return alert('Ocorreu um erro ao cadastras um novo usário!', error);
+        return alert(error.message);
         
     }
 }

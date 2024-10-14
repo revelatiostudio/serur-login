@@ -11,13 +11,32 @@ import ia from '../assets/ia.svg'
 import dots from '../assets/dots.svg'
 import msg from '../assets/msg.svg'
 import Image from 'next/image'
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export default function Home() {
 
   const [temLogin, setTemLogin] = useState(true);
   const [mostrarRecuperarSenha, setMostrarRecuperarSenha] = useState(false);
 
+  const emailRef = useRef(null);
+  const senhaRef = useRef(null);
+  const nomeRef = useRef(null);
+  const tokenRef = useRef(null);
+
+
+  function cadastroSubmit() {
+    const nome = nomeRef.current.value;
+    const email = emailRef.current.value;
+    const senha = senhaRef.current.value;
+    const token = tokenRef.current.value;
+    console.log("Nome:", nome, "Email:", email, "Senha:", senha, "Token:", token);
+  }
+
+  function loginSubmit() {
+    const email = emailRef.current.value;
+    const senha = senhaRef.current.value;
+    console.log("Email:", email, "Senha:", senha);
+  }
   function Login() {
     return (
       <div className="login">
@@ -32,13 +51,13 @@ export default function Home() {
         </div>
 
         <div className="sec-campos">
-          <div class="w-full">
-            <label for="input-label" class="block text-[18px] text-sm font-medium mb-2 dark:text-white">Email</label>
-            <input required type="email" id="input-label" class="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******@gmail.com" />
+          <div className="w-full">
+            <label htmlFor="input-email-l" className="block text-[18px] text-sm font-medium mb-2 dark:text-white">Email</label>
+            <input required type="email" id="input-email-l" className="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******@gmail.com" />
           </div>
-          <div class="w-full mt-4 ">
-            <label for="input-label" class="block text-[18px] text-sm font-medium mb-2 dark:text-white">Senha</label>
-            <input required type="email" id="input-label" class="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******" />
+          <div className="w-full mt-4 ">
+            <label htmlFor="input-senha-l" className="block text-[18px] text-sm font-medium mb-2 dark:text-white">Senha</label>
+            <input required type="email" id="input-senhal" className="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******" />
           </div>
           <p><a onClick={() => { setMostrarRecuperarSenha(true) }}>Esqueceu a senha?</a></p>
         </div>
@@ -76,31 +95,56 @@ export default function Home() {
         </div>
 
         <div className="sec-campos">
+          <form>
+            <div className="w-full">
+              <label htmlFor="input-nomec" className="block text-[18px] text-sm font-medium mb-2 dark:text-white">Nome</label>
+              <input 
+                required 
+                ref={nomeRef}
+                type="text" 
+                id="input-nome" 
+                class="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Nome" />
+            </div>
+            
 
-          <div class="w-full">
-            <label for="input-label" class="block text-[18px] text-sm font-medium mb-2 dark:text-white">Nome</label>
-            <input required type="email" id="input-label" class="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Nome" />
-          </div>
+            <div className="w-full mt-4">
+              <label htmlFor="input-emailc" className="block text-[18px] text-sm font-medium mb-2 dark:text-white">Email</label>
+              <input 
+                required 
+                ref={emailRef}
+                type="email" 
+                id="input-emailc" 
+                className="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******@gmail.com" />
+            </div>
 
-          <div class="w-full mt-4">
-            <label for="input-label" class="block text-[18px] text-sm font-medium mb-2 dark:text-white">Email</label>
-            <input required type="email" id="input-label" class="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******@gmail.com" />
-          </div>
+            <div className="w-full mt-4 ">
+              <label htmlFor="input-senhac" className="block text-[18px] text-sm font-medium mb-2 dark:text-white">Senha</label>
+              <input 
+                required 
+                ref={senhaRef}
+                type="password" 
+                id="input-senhac" 
+                class="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******" />
+            </div>
 
-          <div class="w-full mt-4 ">
-            <label for="input-label" class="block text-[18px] text-sm font-medium mb-2 dark:text-white">Senha</label>
-            <input required type="email" id="input-label" class="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******" />
-          </div>
+            <div className="w-full mt-4">
+              <label htmlFor="input-tokenc" className="block text-[18px] text-sm font-medium mb-2 dark:text-white">Token</label>
+              <input 
+                required 
+                ref={tokenRef}
+                type="password" 
+                id="input-tokenc" 
+                className="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******" />
+            </div>
 
-          <div class="w-full mt-4">
-            <label for="input-label" class="block text-[18px] text-sm font-medium mb-2 dark:text-white">Token</label>
-            <input required type="email" id="input-label" class="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******" />
-          </div>
+          </form>
+
+
 
         </div>
 
         <div className="campos-btn">
-          <button>Continuar</button>
+          <button type="submit" onClick={cadastroSubmit}>Continuar</button>
         </div>
         <p className="p2">Já tem conta? <a onClick={() => { setTemLogin(true) }}>Acesso</a></p>
 
@@ -131,9 +175,9 @@ export default function Home() {
         </div>
 
         <div className="sec-campos">
-          <div class="w-full mt-4">
-            <label for="input-label" class="block text-[18px] text-sm font-medium mb-2 dark:text-white">Email</label>
-            <input required type="email" id="input-label" class="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******@gmail.com" />
+          <div className="w-full mt-4">
+            <label htmlFor="input-label" className="block text-[18px] text-sm font-medium mb-2 dark:text-white">Email</label>
+            <input required type="email" id="input-emaile" className="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******@gmail.com" />
           </div>
         </div>
 

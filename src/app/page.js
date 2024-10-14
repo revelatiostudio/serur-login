@@ -33,7 +33,9 @@ export default function Home() {
     const token = tokenRef.current.value;
 
     const response = await mandaDadosCadastro({nome, email, senha, token});
-    if(response.status === 200) return alert("Cadastrado com sucesso!")
+    if(response.status === 201){
+      return alert("Cadastrado com sucesso!")
+    }
 
     nomeRef.current.value = "";
     emailRef.current.value = "";

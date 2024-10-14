@@ -13,6 +13,8 @@ import msg from '../assets/msg.svg'
 import Image from 'next/image'
 import { useRef, useState } from "react";
 
+import { mandaDadosCadastro } from './services/servicoCadastro.js'
+
 export default function Home() {
 
   const [temLogin, setTemLogin] = useState(true);
@@ -24,18 +26,26 @@ export default function Home() {
   const tokenRef = useRef(null);
 
 
-  function cadastroSubmit() {
+  async function gerenciaNovoCadastro() {
     const nome = nomeRef.current.value;
     const email = emailRef.current.value;
     const senha = senhaRef.current.value;
     const token = tokenRef.current.value;
-    console.log("Nome:", nome, "Email:", email, "Senha:", senha, "Token:", token);
+
+    const response = await mandaDadosCadastro({nome, email, senha, token});
+    if(response.status === 200) return alert("Cadastrado com sucesso!")
+
+    nomeRef.current.value = "";
+    emailRef.current.value = "";
+    senhaRef.current.value = "";
+    tokenRef.current.value = "";
   }
 
-  function loginSubmit() {
+  function gerenciaLogin() {
     const email = emailRef.current.value;
     const senha = senhaRef.current.value;
-    console.log("Email:", email, "Senha:", senha);
+    emailRef.current.value = "";
+    senhaRef.current.value = "";
   }
   function Login() {
     return (
@@ -53,17 +63,27 @@ export default function Home() {
         <div className="sec-campos">
           <div className="w-full">
             <label htmlFor="input-email-l" className="block text-[18px] text-sm font-medium mb-2 dark:text-white">Email</label>
-            <input required type="email" id="input-email-l" className="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******@gmail.com" />
+            <input 
+              required 
+              ref={emailRef}
+              type="email" 
+              id="input-email-l" 
+              className="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******@gmail.com" />
           </div>
           <div className="w-full mt-4 ">
             <label htmlFor="input-senha-l" className="block text-[18px] text-sm font-medium mb-2 dark:text-white">Senha</label>
-            <input required type="email" id="input-senhal" className="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******" />
+            <input 
+              required 
+              ref={senhaRef}
+              type="email" 
+              id="input-senhal" 
+              className="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******" />
           </div>
           <p><a onClick={() => { setMostrarRecuperarSenha(true) }}>Esqueceu a senha?</a></p>
         </div>
 
-        <div className="campos-btn">
-          <button>Continuar</button>
+        <div className="campos-btn" onClick={gerenciaLogin}>
+          <button type="submit">Continuar</button>
         </div>
         <p className="p2">Não tem conta? <a onClick={() => { setTemLogin(false) }}>Solicitar</a></p>
 
@@ -143,8 +163,8 @@ export default function Home() {
 
         </div>
 
-        <div className="campos-btn">
-          <button type="submit" onClick={cadastroSubmit}>Continuar</button>
+        <div className="campos-btn" onClick={gerenciaNovoCadastro}>
+          <button type="submit">Continuar</button>
         </div>
         <p className="p2">Já tem conta? <a onClick={() => { setTemLogin(true) }}>Acesso</a></p>
 

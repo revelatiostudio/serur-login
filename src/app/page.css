@@ -63,6 +63,7 @@
     color: var(--color-black);
     background-color: var(--color-verde-claro);
     margin-top: 32px;
+    cursor: pointer;
 }
 
 .p2 {

@@ -34,9 +34,12 @@ export default function Home() {
     const senha = senhaRef.current.value;
     const token = tokenRef.current.value;
 
-    const response = await mandaDadosCadastro({nome, email, senha, token});
-    if(response.status === 201) return alert("Cadastrado com sucesso!")
-    
+    const response = await mandaDadosCadastro({ nome, email, senha, token });
+    if (response.status === 201) {
+      window.location.reload();
+      return alert("Cadastrado com sucesso!")
+    }
+
 
     nomeRef.current.value = "";
     emailRef.current.value = "";
@@ -47,8 +50,12 @@ export default function Home() {
   async function gerenciaLogin() {
     const email = emailRef.current.value;
     const senha = senhaRef.current.value;
-    const response = await loginUsuario({email, senha});
-    if(response.status === 201) return alert("Logado com sucesso!")
+    const response = await loginUsuario({ email, senha });
+    if (response.status === 201) {
+      window.location.reload();
+      return alert("Logado com sucesso!")
+
+    }
 
     emailRef.current.value = "";
     senhaRef.current.value = "";
@@ -57,10 +64,16 @@ export default function Home() {
   async function gerenciaEsqueciSenha() {
     const email = emailRef.current.value;
 
-    const response = await esqueciSenha({email});
+    const response = await esqueciSenha({ email });
 
-    if(response.status === 200) return alert("Enviamos um email para resetar sua senha.")
-    
+    if (response.status === 201) {
+      window.location.reload();
+      return alert("Enviamos um email para resetar sua senha.")
+
+    }
+
+
+
   }
 
   function Login() {
@@ -79,20 +92,20 @@ export default function Home() {
         <div className="sec-campos">
           <div className="w-full">
             <label htmlFor="input-email-l" className="block text-[18px] text-sm font-medium mb-2 dark:text-white">Email</label>
-            <input 
-              required 
+            <input
+              required
               ref={emailRef}
-              type="email" 
-              id="input-email-l" 
+              type="email"
+              id="input-email-l"
               className="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******@gmail.com" />
           </div>
           <div className="w-full mt-4 ">
             <label htmlFor="input-senha-l" className="block text-[18px] text-sm font-medium mb-2 dark:text-white">Senha</label>
-            <input 
-              required 
+            <input
+              required
               ref={senhaRef}
-              type="password" 
-              id="input-senhal" 
+              type="password"
+              id="input-senhal"
               className="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******" />
           </div>
           <p><a onClick={() => { setMostrarRecuperarSenha(true) }}>Esqueceu a senha?</a></p>
@@ -134,42 +147,42 @@ export default function Home() {
           <form>
             <div className="w-full">
               <label htmlFor="input-nomec" className="block text-[18px] text-sm font-medium mb-2 dark:text-white">Nome</label>
-              <input 
-                required 
+              <input
+                required
                 ref={nomeRef}
-                type="text" 
-                id="input-nome" 
+                type="text"
+                id="input-nome"
                 class="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Nome" />
             </div>
-            
+
 
             <div className="w-full mt-4">
               <label htmlFor="input-emailc" className="block text-[18px] text-sm font-medium mb-2 dark:text-white">Email</label>
-              <input 
-                required 
+              <input
+                required
                 ref={emailRef}
-                type="email" 
-                id="input-emailc" 
+                type="email"
+                id="input-emailc"
                 className="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******@gmail.com" />
             </div>
 
             <div className="w-full mt-4 ">
               <label htmlFor="input-senhac" className="block text-[18px] text-sm font-medium mb-2 dark:text-white">Senha</label>
-              <input 
-                required 
+              <input
+                required
                 ref={senhaRef}
-                type="password" 
-                id="input-senhac" 
+                type="password"
+                id="input-senhac"
                 class="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******" />
             </div>
 
             <div className="w-full mt-4">
               <label htmlFor="input-tokenc" className="block text-[18px] text-sm font-medium mb-2 dark:text-white">Token</label>
-              <input 
-                required 
+              <input
+                required
                 ref={tokenRef}
-                type="password" 
-                id="input-tokenc" 
+                type="password"
+                id="input-tokenc"
                 className="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******" />
             </div>
 
@@ -320,14 +333,14 @@ export default function Home() {
         </div>
         <div className="min-cards">
           <div className="card">
-            <Image src={ia} width={44} height={44} alt="ia"/>
+            <Image src={ia} width={44} height={44} alt="ia" />
             <p>IA que valida inicial e contestação com rapidez e precisão.</p>
-            <Image src={dots} width={30} height={30} alt="3 pontos"/>
+            <Image src={dots} width={30} height={30} alt="3 pontos" />
           </div>
           <div className="card">
-            <Image src={msg} width={44} height={44} alt="chat"/>
+            <Image src={msg} width={44} height={44} alt="chat" />
             <p>Verificação automática de OAB e documentos de forma confiável.</p>
-            <Image src={dots} width={30} height={30} alt="3 pontos"/>
+            <Image src={dots} width={30} height={30} alt="3 pontos" />
           </div>
 
 

@@ -335,12 +335,12 @@ export default function Home() {
           <div className="card">
             <Image src={ia} width={44} height={44} alt="ia" />
             <p>IA que valida inicial e contestação com rapidez e precisão.</p>
-            <Image src={dots} width={30} height={30} alt="3 pontos" />
+            <Image src={dots} width={30} height={30} alt="3 pontos" style={{cursor:"pointer"}}/>
           </div>
           <div className="card">
             <Image src={msg} width={44} height={44} alt="chat" />
             <p>Verificação automática de OAB e documentos de forma confiável.</p>
-            <Image src={dots} width={30} height={30} alt="3 pontos" />
+            <Image src={dots} width={30} height={30} alt="3 pontos" style={{cursor:"pointer"}} />
           </div>
 
 

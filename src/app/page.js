@@ -28,6 +28,7 @@ export default function Home() {
   const tokenRef = useRef(null);
 
 
+
   async function gerenciaNovoCadastro() {
     const nome = nomeRef.current.value;
     const email = emailRef.current.value;
@@ -47,7 +48,9 @@ export default function Home() {
     tokenRef.current.value = "";
   }
 
-  async function gerenciaLogin() {
+  async function gerenciaLogin(event) {
+    event.preventDefault();
+
     const email = emailRef.current.value;
     const senha = senhaRef.current.value;
     const response = await loginUsuario({ email, senha });
@@ -78,53 +81,57 @@ export default function Home() {
 
   function Login() {
     return (
-      <div className="login">
-        <Image
-          src={sophiaLogo}
-          width={166}
-          height={44}
-          alt="sophia logo"
-        />
-        <div className="p-text">
-          <p>Preencha os campos abaixo</p>
-        </div>
-
-        <div className="sec-campos">
-          <div className="w-full">
-            <label htmlFor="input-email-l" className="block text-[18px] text-sm font-medium mb-2 dark:text-white">Email</label>
-            <input
-              required
-              ref={emailRef}
-              type="email"
-              id="input-email-l"
-              className="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******@gmail.com" />
+      <form onSubmit={gerenciaLogin}>
+        <div className="login">
+          <Image
+            src={sophiaLogo}
+            width={166}
+            height={44}
+            alt="sophia logo"
+          />
+          <div className="p-text">
+            <p>Preencha os campos abaixo</p>
           </div>
-          <div className="w-full mt-4 ">
-            <label htmlFor="input-senha-l" className="block text-[18px] text-sm font-medium mb-2 dark:text-white">Senha</label>
-            <input
-              required
-              ref={senhaRef}
-              type="password"
-              id="input-senhal"
-              className="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******" />
+
+          <div className="sec-campos">
+            <div className="w-full">
+              <label htmlFor="input-email-l" className="block text-[18px] text-sm font-medium mb-2 dark:text-white">Email</label>
+              <input
+                required
+                ref={emailRef}
+                type="email"
+                id="input-email-l"
+                className="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******@gmail.com" />
+            </div>
+            <div className="w-full mt-4 ">
+              <label htmlFor="input-senha-l" className="block text-[18px] text-sm font-medium mb-2 dark:text-white">Senha</label>
+              <input
+                required
+                ref={senhaRef}
+                type="password"
+                id="input-senhal"
+                className="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******" />
+            </div>
+            <p><a onClick={() => { setMostrarRecuperarSenha(true) }}>Esqueceu a senha?</a></p>
           </div>
-          <p><a onClick={() => { setMostrarRecuperarSenha(true) }}>Esqueceu a senha?</a></p>
+
+          <div className="campos-btn">
+            <button type="submit">Continuar</button>
+          </div>
+          <p className="p2">Não tem conta? <a onClick={() => { setTemLogin(false) }}>Solicitar</a></p>
+
+          <Image
+            style={{ marginTop: '150px' }}
+            src={serur}
+            width={166}
+            height={44}
+            alt="serur logo"
+          />
+
         </div>
 
-        <div className="campos-btn" onClick={gerenciaLogin}>
-          <button type="submit">Continuar</button>
-        </div>
-        <p className="p2">Não tem conta? <a onClick={() => { setTemLogin(false) }}>Solicitar</a></p>
+      </form>
 
-        <Image
-          style={{ marginTop: '150px' }}
-          src={serur}
-          width={166}
-          height={44}
-          alt="serur logo"
-        />
-
-      </div>
 
     )
 
@@ -335,12 +342,12 @@ export default function Home() {
           <div className="card">
             <Image src={ia} width={44} height={44} alt="ia" />
             <p>IA que valida inicial e contestação com rapidez e precisão.</p>
-            <Image src={dots} width={30} height={30} alt="3 pontos" style={{cursor:"pointer"}}/>
+            <Image src={dots} width={30} height={30} alt="3 pontos" style={{ cursor: "pointer" }} />
           </div>
           <div className="card">
             <Image src={msg} width={44} height={44} alt="chat" />
             <p>Verificação automática de OAB e documentos de forma confiável.</p>
-            <Image src={dots} width={30} height={30} alt="3 pontos" style={{cursor:"pointer"}} />
+            <Image src={dots} width={30} height={30} alt="3 pontos" style={{ cursor: "pointer" }} />
           </div>
 
 

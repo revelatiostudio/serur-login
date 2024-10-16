@@ -54,7 +54,7 @@ export default function Home() {
     const email = emailRef.current.value;
     const senha = senhaRef.current.value;
     const response = await loginUsuario({ email, senha });
-    if (response.status === 201) {
+    if (response.status === 200) {
       window.location.reload();
       return alert("Logado com sucesso!")
 
@@ -66,7 +66,7 @@ export default function Home() {
     const email = emailRef.current.value;
     const response = await esqueciSenha({ email });
 
-    if (response.status === 201) {
+    if (response.status === 200) {
       window.location.reload();
       return alert("Enviamos um email para resetar sua senha.")
 

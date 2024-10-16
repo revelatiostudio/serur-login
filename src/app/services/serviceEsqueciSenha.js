@@ -2,7 +2,7 @@ import axios from 'axios';
 
 async function esqueciSenha({email}) {
     try {
-        const response = await axios.post('http://serur-ia-sophia.vercel.app/api/auth/forgot-password', {
+        const response = await axios.post('http://serur-ia-sophia.vercel.app/api/auth/forgot-password', { 
             email,
         })
         return response

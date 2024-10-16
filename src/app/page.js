@@ -32,7 +32,7 @@ export default function Home() {
   async function gerenciaNovoCadastro(event) {
     event.preventDefault();
 
-    
+
 
     const nome = nomeRef.current.value;
     const email = emailRef.current.value;
@@ -61,9 +61,9 @@ export default function Home() {
     }
   }
 
-  async function gerenciaEsqueciSenha() {
+  async function gerenciaEsqueciSenha(event) {
+    event.preventDefault();
     const email = emailRef.current.value;
-
     const response = await esqueciSenha({ email });
 
     if (response.status === 201) {
@@ -219,38 +219,41 @@ export default function Home() {
 
   function RecuperarSenha() {
     return (
-      <div className="login">
-        <Image
-          src={sophiaLogo}
-          width={166}
-          height={44}
-          alt="sophia logo"
-        />
-        <div className="p-text">
-          <p>Preencha os campos abaixo</p>
-        </div>
-
-        <div className="sec-campos">
-          <div className="w-full mt-4">
-            <label htmlFor="input-label" className="block text-[18px] text-sm font-medium mb-2 dark:text-white">Email</label>
-            <input required ref={emailRef} type="email" id="input-emaile" className="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******@gmail.com" />
+      <form onSubmit={gerenciaEsqueciSenha}>
+        <div className="login">
+          <Image
+            src={sophiaLogo}
+            width={166}
+            height={44}
+            alt="sophia logo"
+          />
+          <div className="p-text">
+            <p>Preencha os campos abaixo</p>
           </div>
+
+          <div className="sec-campos">
+            <div className="w-full mt-4">
+              <label htmlFor="input-label" className="block text-[18px] text-sm font-medium mb-2 dark:text-white">Email</label>
+              <input required ref={emailRef} type="email" id="input-emaile" className="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******@gmail.com" />
+            </div>
+          </div>
+
+          <div className="campos-btn">
+            <button type="submit">Continuar</button>
+          </div>
+          <p className="p2">Lembrou sua senha? <a onClick={() => { setMostrarRecuperarSenha(false) }}>Acesso</a></p>
+
+          <Image
+            style={{ marginTop: '150px' }}
+            src={serur}
+            width={166}
+            height={44}
+            alt="serur logo"
+          />
+
         </div>
+      </form>
 
-        <div className="campos-btn" onClick={gerenciaEsqueciSenha}>
-          <button type="submit">Continuar</button>
-        </div>
-        <p className="p2">Lembrou sua senha? <a onClick={() => { setMostrarRecuperarSenha(false) }}>Acesso</a></p>
-
-        <Image
-          style={{ marginTop: '150px' }}
-          src={serur}
-          width={166}
-          height={44}
-          alt="serur logo"
-        />
-
-      </div>
     )
   }
   return (

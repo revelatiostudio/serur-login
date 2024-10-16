@@ -29,7 +29,11 @@ export default function Home() {
 
 
 
-  async function gerenciaNovoCadastro() {
+  async function gerenciaNovoCadastro(event) {
+    event.preventDefault();
+
+    
+
     const nome = nomeRef.current.value;
     const email = emailRef.current.value;
     const senha = senhaRef.current.value;
@@ -42,10 +46,6 @@ export default function Home() {
     }
 
 
-    nomeRef.current.value = "";
-    emailRef.current.value = "";
-    senhaRef.current.value = "";
-    tokenRef.current.value = "";
   }
 
   async function gerenciaLogin(event) {
@@ -59,9 +59,6 @@ export default function Home() {
       return alert("Logado com sucesso!")
 
     }
-
-    emailRef.current.value = "";
-    senhaRef.current.value = "";
   }
 
   async function gerenciaEsqueciSenha() {
@@ -139,19 +136,20 @@ export default function Home() {
 
   function Cadastro() {
     return (
-      <div className="login">
-        <Image
-          src={sophiaLogo}
-          width={166}
-          height={44}
-          alt="sophia logo"
-        />
-        <div className="p-text cadastro">
-          <p>Preencha os campos abaixo</p>
-        </div>
+      <form onSubmit={gerenciaNovoCadastro}>
+        <div className="login">
+          <Image
+            src={sophiaLogo}
+            width={166}
+            height={44}
+            alt="sophia logo"
+          />
+          <div className="p-text cadastro">
+            <p>Preencha os campos abaixo</p>
+          </div>
 
-        <div className="sec-campos">
-          <form>
+          <div className="sec-campos">
+
             <div className="w-full">
               <label htmlFor="input-nomec" className="block text-[18px] text-sm font-medium mb-2 dark:text-white">Nome</label>
               <input
@@ -193,26 +191,28 @@ export default function Home() {
                 className="h-[62px] py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-customGray dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="*******" />
             </div>
 
-          </form>
 
 
+
+
+          </div>
+
+          <div className="campos-btn">
+            <button type="submit">Continuar</button>
+          </div>
+          <p className="p2">Já tem conta? <a onClick={() => { setTemLogin(true) }}>Acesso</a></p>
+
+          <Image
+            style={{ marginTop: '40px' }}
+            src={serur}
+            width={166}
+            height={44}
+            alt="serur logo"
+          />
 
         </div>
+      </form>
 
-        <div className="campos-btn" onClick={gerenciaNovoCadastro}>
-          <button type="submit">Continuar</button>
-        </div>
-        <p className="p2">Já tem conta? <a onClick={() => { setTemLogin(true) }}>Acesso</a></p>
-
-        <Image
-          style={{ marginTop: '40px' }}
-          src={serur}
-          width={166}
-          height={44}
-          alt="serur logo"
-        />
-
-      </div>
     )
 
   }

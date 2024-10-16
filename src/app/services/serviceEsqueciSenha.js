@@ -8,7 +8,8 @@ async function esqueciSenha({email}) {
         return response
         
     } catch (error) {
-        return alert(error.message);
+        console.error(error.message);
+        return alert("Erro ao mudar de senha!");
         
     }
     

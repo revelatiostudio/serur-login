@@ -9,7 +9,8 @@ async function loginUsuario({email, senha}) {
         return response
         
     } catch (error) {
-        return alert(error.message);
+        console.error("Erro ao tentar fazer login:", error.message);
+        return alert("Erro ao tentar fazer login!");
         
     }
     

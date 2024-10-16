@@ -11,7 +11,8 @@ async function mandaDadosCadastro({nome, email, senha, token}) {
         return response
         
     } catch (error) {
-        return alert(error.message);
+        console.error(error.message);
+        return alert("Erro ao cadastrar um usuário!");
         
     }
 }

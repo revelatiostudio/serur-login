@@ -13,6 +13,12 @@ import trash from '../assets/trash.svg'
 
 
 export default function DashBoard() {
+    const data = [
+        { id: 1, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "30/100", status: "Em Andamento" },
+        { id: 2, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "70/100", status: "Concluído" },
+        { id: 3, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "100/100", status: "Erro" },
+        { id: 4, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "72/100", status: "Em Andamento" },
+    ];
     return (
         <section className='container-dash'>
             <header className='header-dash'>
@@ -73,55 +79,26 @@ export default function DashBoard() {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>12345678910</td>
-                                <td>01/08/2024</td>
-                                <td>Banco Pan S.A.</td>
-                                <td className="low">30/100</td>
-                                <td>Em Andamento</td>
-                                <td className='actions'>
-                                    <button><Image src={pen} width={18} height={18} alt='caneta' /></button>
-                                    <button><Image src={star} width={18} height={18} alt='estrela' /></button>
-                                    <button><Image src={trash} width={18} height={18} alt='lixo' /></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>12345678910</td>
-                                <td>01/08/2024</td>
-                                <td>Banco Pan S.A.</td>
-                                <td className="medium">70/100</td>
-                                <td>Concluído</td>
-                                <td>
-                                    <button>Edit</button>
-                                    <button>Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>12345678910</td>
-                                <td>01/08/2024</td>
-                                <td>Banco Pan S.A.</td>
-                                <td className="high">100/100</td>
-                                <td>Erro</td>
-                                <td>
-                                    <button>Edit</button>
-                                    <button>Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>12345678910</td>
-                                <td>01/08/2024</td>
-                                <td>Banco Pan S.A.</td>
-                                <td className="medium">72/100</td>
-                                <td>Em Andamento</td>
-                                <td>
-                                    <button>Edit</button>
-                                    <button>Delete</button>
-                                </td>
-                            </tr>
+
+                            {
+                                data.map((arq) => (
+                                    <tr key={arq.id}>
+                                        <td>{arq.id}</td>
+                                        <td>{arq.numeroProcesso}</td>
+                                        <td>{arq.dataSubmissao}</td>
+                                        <td>{arq.cliente}</td>
+                                        <td>{arq.notaSophia}</td>
+                                        <td>{arq.status}</td>
+                                        <td className='actions'>
+                                            <button><Image src={pen} width={18} height={18} alt='caneta' /></button>
+                                            <button><Image src={star} width={18} height={18} alt='estrela' /></button>
+                                            <button><Image src={trash} width={18} height={18} alt='lixo' /></button>
+                                        </td>
+
+                                    </tr>
+                                ))
+                            }
+
                         </tbody>
                     </table>
 

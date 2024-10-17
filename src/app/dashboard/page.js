@@ -6,6 +6,11 @@ import Image from 'next/image'
 import sophiaLogo from '../assets/sophiaLogo.svg'
 import frame from '../assets/frame-welcome.png'
 import seta from '../assets/setap.svg'
+import pen from '../assets/pen.svg'
+import star from '../assets/star.svg'
+import trash from '../assets/trash.svg'
+
+
 
 export default function DashBoard() {
     return (
@@ -37,7 +42,7 @@ export default function DashBoard() {
                             src={seta}
                             width={34}
                             height={34}
-                            style={{cursor: "pointer", position: "absolute", right: "34px"}}
+                            style={{ cursor: "pointer", position: "absolute", right: "34px" }}
                             alt='seta' />
 
                     </div>
@@ -47,6 +52,85 @@ export default function DashBoard() {
                 </div>
 
             </div>
+            <div className='sec-dashboard'>
+                <div className='dashboard'>
+                    <div className='filter'>
+                        <input type='text' placeholder="🔍 Analises Sophia" />
+                        <button>+ Adicionar</button>
+
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>NÚMERO PROCESSO</th>
+                                <th>DATA SUBMISSÃO</th>
+                                <th>CLIENTE</th>
+                                <th>NOTA SOPHIA</th>
+                                <th>STATUS</th>
+                                <th className='ac-thead'>ACTIONS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>12345678910</td>
+                                <td>01/08/2024</td>
+                                <td>Banco Pan S.A.</td>
+                                <td className="low">30/100</td>
+                                <td>Em Andamento</td>
+                                <td className='actions'>
+                                    <button><Image src={pen} width={18} height={18} alt='caneta' /></button>
+                                    <button><Image src={star} width={18} height={18} alt='estrela' /></button>
+                                    <button><Image src={trash} width={18} height={18} alt='lixo' /></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>12345678910</td>
+                                <td>01/08/2024</td>
+                                <td>Banco Pan S.A.</td>
+                                <td className="medium">70/100</td>
+                                <td>Concluído</td>
+                                <td>
+                                    <button>Edit</button>
+                                    <button>Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>12345678910</td>
+                                <td>01/08/2024</td>
+                                <td>Banco Pan S.A.</td>
+                                <td className="high">100/100</td>
+                                <td>Erro</td>
+                                <td>
+                                    <button>Edit</button>
+                                    <button>Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>12345678910</td>
+                                <td>01/08/2024</td>
+                                <td>Banco Pan S.A.</td>
+                                <td className="medium">72/100</td>
+                                <td>Em Andamento</td>
+                                <td>
+                                    <button>Edit</button>
+                                    <button>Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+            </div>
+
+
         </section>
 
 

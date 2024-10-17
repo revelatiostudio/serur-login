@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 async function loginUsuario({email, senha}) {
-    console.log('chamou log')
     try {
         const response = await axios.post('https://serur-ia-sophia.vercel.app/api/auth/login', { 
             email:email,
@@ -11,9 +10,7 @@ async function loginUsuario({email, senha}) {
         return response
         
     } catch (error) {
-        console.error("Erro ao tentar fazer login:", error.message);
-        return alert("Erro ao tentar fazer login!");
-        
+        return alert(error.response.data.message);        
     }
     
 }

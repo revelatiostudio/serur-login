@@ -17,7 +17,10 @@ import { mandaDadosCadastro } from './services/servicoCadastro.js';
 import { loginUsuario } from './services/servicoLogin.js'
 import { esqueciSenha } from './services/serviceEsqueciSenha.js'
 
+import { useRouter } from 'next/navigation';
+
 export default function Home() {
+  const router = useRouter()
 
   const [temLogin, setTemLogin] = useState(true);
   const [mostrarRecuperarSenha, setMostrarRecuperarSenha] = useState(false);
@@ -55,7 +58,7 @@ export default function Home() {
     const senha = senhaRef.current.value;
     const response = await loginUsuario({ email, senha });
     if (response.status === 200) {
-      window.location.reload();
+      router.push('/dashboard')
       return alert("Logado com sucesso!")
 
     }

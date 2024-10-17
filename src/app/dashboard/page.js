@@ -21,7 +21,7 @@ export default function DashBoard() {
     ];
     return (
         <section className='container-dash'>
-            <header className='header-dash'>
+            <header>
                 <div className='header-dash'>
                     <p>v1.0</p>
                     <Image

@@ -6,7 +6,6 @@ async function loginUsuario({email, senha}) {
             email:email,
             password:senha
         })
-        console.log(response)
         return response
         
     } catch (error) {

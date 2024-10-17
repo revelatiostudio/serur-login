@@ -7,7 +7,9 @@
   padding: 0;
   box-sizing: border-box;
   text-decoration: none;
-
+}
+html,body{
+  background-color: var( --color-gray);
 }
 /* .grid-global{
   width: 100%;
@@ -17,6 +19,11 @@
   position: relative;
 } */
 
+.container-dash{
+  width: 100%;
+  max-width: 92.6875rem;
+  margin: 0 auto;
+}
 :root{
   --color-black: #000000;
   --color-gray: #151515;

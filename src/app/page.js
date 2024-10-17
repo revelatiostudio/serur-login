@@ -1,15 +1,15 @@
 'use client'
 import "./page.css";
 
-import sophiaLogo from '../assets/sophiaLogo.svg'
-import serur from '../assets/serur.svg'
-import relogio from '../assets/relogio.svg'
-import setap from '../assets/setap.svg'
-import crescente from '../assets/crescente.svg'
-import cadeado from '../assets/cadeado.svg'
-import ia from '../assets/ia.svg'
-import dots from '../assets/dots.svg'
-import msg from '../assets/msg.svg'
+import sophiaLogo from './assets/sophiaLogo.svg'
+import serur from './assets/serur.svg'
+import relogio from './assets/relogio.svg'
+import setap from './assets/setap.svg'
+import crescente from './assets/crescente.svg'
+import cadeado from './assets/cadeado.svg'
+import ia from './assets/ia.svg'
+import dots from './assets/dots.svg'
+import msg from './assets/msg.svg'
 import Image from 'next/image'
 import { useRef, useState } from "react";
 

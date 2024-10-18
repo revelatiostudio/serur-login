@@ -1,6 +1,10 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './dashboard.css';
+import Cookies from 'js-cookie'
+
+import { jwtDecode } from "jwt-decode";
+
 
 import Image from 'next/image'
 
@@ -10,6 +14,7 @@ import seta from '../assets/setap.svg'
 import pen from '../assets/pen.svg'
 import star from '../assets/star.svg'
 import trash from '../assets/trash.svg'
+
 
 
 
@@ -29,6 +34,8 @@ export default function DashBoard() {
         { id: 12, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "72/100", status: "Em Andamento" },
     ];
 
+    const [name, setName] = useState("")
+
     const [currentPage, setCurrentPage] = useState(0);
     const itemsPerPage = 4;
 
@@ -39,7 +46,6 @@ export default function DashBoard() {
     const currentItens = data.slice(starIndex, endIndex);
 
     function proxPagina(){
-        console.log(pages)
         if(currentPage >= pages - 1){
             return
         }else{
@@ -55,6 +61,13 @@ export default function DashBoard() {
         }
 
     }
+
+    useEffect(() => {
+       const token = Cookies.get('token');
+       const tokenDecoded = jwtDecode(token);
+       setName(tokenDecoded.userName)
+
+    },[])
     return (
         <section className='container-dash'>
             <header>
@@ -70,7 +83,7 @@ export default function DashBoard() {
                 </div>
             </header>
             <div className='welcome'>
-                <h1>Olá, Zilda 👋</h1>
+                <h1>Olá, {name}👋</h1>
 
                 <div className='text-wel'>
                     <div className='plat-sophia'>

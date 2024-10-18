@@ -19,6 +19,8 @@ import { esqueciSenha } from './services/serviceEsqueciSenha.js'
 
 import { useRouter } from 'next/navigation';
 
+import Cookies from 'js-cookie'
+
 export default function Home() {
   const router = useRouter()
 
@@ -58,6 +60,7 @@ export default function Home() {
     const senha = senhaRef.current.value;
     const response = await loginUsuario({ email, senha });
     if (response.status === 200) {
+      Cookies.set('token', response.data.token , { expires: 1 });
       router.push('/dashboard')
       return alert("Logado com sucesso!")
 

@@ -1,4 +1,5 @@
-import React from 'react';
+'use client'
+import React, { useState } from 'react';
 import './dashboard.css';
 
 import Image from 'next/image'
@@ -18,7 +19,41 @@ export default function DashBoard() {
         { id: 2, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "70/100", status: "Concluído" },
         { id: 3, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "100/100", status: "Erro" },
         { id: 4, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "72/100", status: "Em Andamento" },
+        { id: 5, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "30/100", status: "Em Andamento" },
+        { id: 6, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "70/100", status: "Concluído" },
+        { id: 7, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "100/100", status: "Erro" },
+        { id: 8, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "72/100", status: "Em Andamento" },
+        { id: 9, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "30/100", status: "Em Andamento" },
+        { id: 10, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "70/100", status: "Concluído" },
+        { id: 11, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "100/100", status: "Erro" },
+        { id: 12, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "72/100", status: "Em Andamento" },
     ];
+
+    const [currentPage, setCurrentPage] = useState(0);
+
+    const pages = Math.ceil(data.length / 4);
+
+    const starIndex = currentPage * 4;
+    const endIndex = starIndex + 4;
+    const currentItens = data.slice(starIndex, endIndex);
+
+    function proxPagina(){
+        console.log(pages)
+        if(currentPage >= pages - 1){
+            return
+        }else{
+            setCurrentPage(currentPage + 1)
+        }
+
+    }
+    function voltaPagina(){
+        if(currentPage <= 0){
+            return
+        }else{
+            setCurrentPage(currentPage - 1)
+        }
+
+    }
     return (
         <section className='container-dash'>
             <header>
@@ -81,7 +116,7 @@ export default function DashBoard() {
                         <tbody>
 
                             {
-                                data.map((arq) => (
+                                currentItens.map((arq) => (
                                     <tr key={arq.id}>
                                         <td>{arq.id}</td>
                                         <td>{arq.numeroProcesso}</td>
@@ -102,18 +137,18 @@ export default function DashBoard() {
                         </tbody>
                     </table>
                     <nav className="flex items-center gap-x-1" aria-label="Pagination">
-                        <button type="button" className="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-2 text-sm rounded-lg text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-gray-200 dark:focus:bg-white/10" aria-label="Previous">
+                        <button onClick={voltaPagina } type="button" className="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-2 text-sm rounded-lg text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-gray-200 dark:focus:bg-white/10" aria-label="Previous">
                             <svg className="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="m15 18-6-6 6-6"></path>
                             </svg>
                             <span className="sr-only">Previous</span>
                         </button>
                         <div className="flex items-center gap-x-1">
-                            <span className="min-h-[38px] min-w-[38px] flex justify-center items-center border border-gray-100 text-gray-800 py-2 px-3 text-sm rounded-lg focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-300 dark:text-black dark:focus:bg-black/10">1</span>
+                            <span className="min-h-[38px] min-w-[38px] flex justify-center items-center border border-gray-100 text-gray-800 py-2 px-3 text-sm rounded-lg focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-300 dark:text-black dark:focus:bg-black/10">{currentPage + 1}</span>
                             <span className="min-h-[38px] flex justify-center items-center text-gray-500 py-2 px-1.5 text-sm dark:text-neutral-500">of</span>
-                            <span className="min-h-[38px] flex justify-center items-center text-gray-500 py-2 px-1.5 text-sm dark:text-neutral-500">3</span>
+                            <span className="min-h-[38px] flex justify-center items-center text-gray-500 py-2 px-1.5 text-sm dark:text-neutral-500">{pages}</span>
                         </div>
-                        <button type="button" className="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-2 text-sm rounded-lg text-gray-800 hover:bg-gray-800 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-gray-200 dark:focus:bg-white/10" aria-label="Next">
+                        <button onClick={proxPagina} type="button" className="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-2 text-sm rounded-lg text-gray-800 hover:bg-gray-800 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-gray-200 dark:focus:bg-white/10" aria-label="Next">
                             <span className="sr-only">Next</span>
                             <svg className="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="m9 18 6-6-6-6"></path>

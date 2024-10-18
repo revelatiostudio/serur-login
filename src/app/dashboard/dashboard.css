@@ -99,6 +99,7 @@ table {
     width: 100%;
     border-collapse: collapse;
     table-layout: fixed;
+    margin-bottom: 5px;
 }
 .actions{
     display: flex;

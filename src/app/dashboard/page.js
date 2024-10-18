@@ -30,11 +30,12 @@ export default function DashBoard() {
     ];
 
     const [currentPage, setCurrentPage] = useState(0);
+    const itemsPerPage = 4;
 
-    const pages = Math.ceil(data.length / 4);
+    const pages = Math.ceil(data.length / itemsPerPage);
 
-    const starIndex = currentPage * 4;
-    const endIndex = starIndex + 4;
+    const starIndex = currentPage * itemsPerPage;
+    const endIndex = starIndex + itemsPerPage;
     const currentItens = data.slice(starIndex, endIndex);
 
     function proxPagina(){

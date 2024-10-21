@@ -30,8 +30,8 @@ export default function DashBoard() {
         { id: 8, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "72/100", status: "Em Andamento" },
         { id: 9, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "30/100", status: "Em Andamento" },
         { id: 10, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "70/100", status: "Concluído" },
-        { id: 11, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "100/100", status: "Erro" },
-        { id: 12, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "72/100", status: "Em Andamento" },
+        { id: 11, numeroProcesso: "987654321", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "100/100", status: "Erro" },
+        { id: 12, numeroProcesso: "10987654321", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "72/100", status: "Em Andamento" },
     ];
 
     const [name, setName] = useState("");
@@ -49,8 +49,10 @@ export default function DashBoard() {
 
     const [sortDirection, setSortDirection] = useState('ascending');
     const [sortNote, setSortNote] = useState('ascending');
+    const [sortProcesso, setSortProcesso] = useState('ascending')
 
-    const [renderiza, setRenderiza] = useState([]);
+
+
     const [sortCriteria, setSortCriteria] = useState('id');
 
     function proxPagina() {
@@ -99,46 +101,55 @@ export default function DashBoard() {
         return sortDirection === 'ascending' ? a.id - b.id : b.id - a.id;
     });
 
-    
-        const sortedNote = [...dadosFiltrados].sort((a, b) => {
-            const sophiaA = a.notaSophia.split('/')[0];
-            const sophiaB = b.notaSophia.split('/')[0];
-            return sortNote === 'ascending' ? sophiaA - sophiaB : sophiaB - sophiaA;
-            
-        })
 
-        function sortedByNote(){
-            const direction = sortNote === 'ascending' ? 'descending' : 'ascending';
-            setSortNote(direction);
-            setSortCriteria('nota');
+    const sortedNote = [...dadosFiltrados].sort((a, b) => {
+        const sophiaA = a.notaSophia.split('/')[0];
+        const sophiaB = b.notaSophia.split('/')[0];
+        return sortNote === 'ascending' ? sophiaA - sophiaB : sophiaB - sophiaA;
 
-        }
+    })
 
-        let dadosParaRenderizar = [...dadosFiltrados];
-        
-        if(sortCriteria === "id"){
-            dadosParaRenderizar = sortedId.slice(starIndex, endIndex);
-        }
-        else if(sortCriteria === "nota"){
-            dadosParaRenderizar = sortedNote.slice(starIndex, endIndex);
-        }
-        else{
-            dadosParaRenderizar = filtroUnico ? filtrados : currentItens;
-        }
-    
+    const sortNumProcesso = [...dadosFiltrados].sort((a,b) => {
+        return sortProcesso === 'ascending' ? a.numeroProcesso - b.numeroProcesso : b.numeroProcesso - a.numeroProcesso;
 
+    })
 
-     
+    function sortedByNote() {
+        const direction = sortNote === 'ascending' ? 'descending' : 'ascending';
+        setSortNote(direction);
+        setSortCriteria('nota');
 
-    
-
-    const pagesFiltro = Math.ceil(dadosFiltrados.length / itemsPerPage);
-
+    }
     function sortById() {
         const direction = sortDirection === 'ascending' ? 'descending' : 'ascending';
         setSortDirection(direction);
         setSortCriteria('id');
     };
+    function sortNProcesso() {
+        const direction = sortProcesso === 'ascending' ? 'descending' : 'ascending';
+        setSortProcesso(direction);
+        setSortCriteria('processo');
+    };
+
+    let dadosParaRenderizar = [...dadosFiltrados];
+    const pagesFiltro = Math.ceil(dadosFiltrados.length / itemsPerPage);
+
+    if (sortCriteria === "id") {
+        dadosParaRenderizar = sortedId.slice(starIndex, endIndex);
+    }
+    else if (sortCriteria === "nota") {
+        dadosParaRenderizar = sortedNote.slice(starIndex, endIndex);
+
+    }else if(sortCriteria == "processo"){
+        dadosParaRenderizar = sortNumProcesso.slice(starIndex, endIndex);
+
+    }
+    else {
+        dadosParaRenderizar = filtroUnico ? filtrados : currentItens;
+    }
+
+
+
 
     return (
         <section className='container-dash'>
@@ -191,7 +202,7 @@ export default function DashBoard() {
                         <thead>
                             <tr>
                                 <th onClick={sortById}>ID</th>
-                                <th>NÚMERO PROCESSO</th>
+                                <th onClick={sortNProcesso}>NÚMERO PROCESSO</th>
                                 <th>DATA SUBMISSÃO</th>
                                 <th>CLIENTE</th>
                                 <th onClick={sortedByNote}>NOTA SOPHIA</th>

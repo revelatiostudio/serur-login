@@ -20,7 +20,7 @@ import trash from '../assets/trash.svg'
 
 export default function DashBoard() {
     const data = [
-        { id: 1, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "30/100", status: "Em Andamento" },
+        { id: 1, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "a", notaSophia: "30/100", status: "Em Andamento" },
         { id: 2, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "70/100", status: "Concluído" },
         { id: 3, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "100/100", status: "Erro" },
         { id: 4, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "72/100", status: "Em Andamento" },
@@ -31,7 +31,7 @@ export default function DashBoard() {
         { id: 9, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "30/100", status: "Em Andamento" },
         { id: 10, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "70/100", status: "Concluído" },
         { id: 11, numeroProcesso: "987654321", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "100/100", status: "Erro" },
-        { id: 12, numeroProcesso: "10987654321", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "72/100", status: "Em Andamento" },
+        { id: 12, numeroProcesso: "10987654321", dataSubmissao: "01/08/2024", cliente: "zanco Pan S.A.", notaSophia: "72/100", status: "Em Andamento" },
     ];
 
     const [name, setName] = useState("");
@@ -51,6 +51,7 @@ export default function DashBoard() {
     const [sortNote, setSortNote] = useState('ascending');
     const [sortProcesso, setSortProcesso] = useState('ascending');
     const [sortStatus, setSortStatus] = useState('ascending');
+    const [sortCliente, setSortCliente] = useState('ascending');
 
 
 
@@ -122,6 +123,13 @@ export default function DashBoard() {
         if (statusA > statusB) return sortStatus === 'ascending' ? 1 : -1;
         return 0; 
     })
+    const sortedClient = [...dadosFiltrados].sort((a,b) => {
+        const clientA = a.cliente.toLocaleLowerCase();
+        const clientB = b.cliente.toLocaleLowerCase();
+        if (clientA < clientB) return sortCliente === 'ascending' ? -1 : 1;
+        if (clientA > clientB) return sortCliente === 'ascending' ? 1 : -1;
+        return 0; 
+    })
 
     function sortedByNote() {
         const direction = sortNote === 'ascending' ? 'descending' : 'ascending';
@@ -144,6 +152,11 @@ export default function DashBoard() {
         setSortStatus(direction);
         setSortCriteria('status');
     };
+    function sortByClient() {
+        const direction = sortCliente === 'ascending' ? 'descending' : 'ascending';
+        setSortCliente(direction);
+        setSortCriteria('client');
+    };
 
     let dadosParaRenderizar = [...dadosFiltrados];
     const pagesFiltro = Math.ceil(dadosFiltrados.length / itemsPerPage);
@@ -159,6 +172,9 @@ export default function DashBoard() {
 
     }else if(sortCriteria === "status"){
         dadosParaRenderizar = status.slice(starIndex, endIndex);
+
+    }else if(sortCriteria === "client"){
+        dadosParaRenderizar = sortedClient.slice(starIndex, endIndex);
 
     }
     else {
@@ -221,7 +237,7 @@ export default function DashBoard() {
                                 <th onClick={sortById}>ID</th>
                                 <th onClick={sortNProcesso}>NÚMERO PROCESSO</th>
                                 <th>DATA SUBMISSÃO</th>
-                                <th>CLIENTE</th>
+                                <th onClick={sortByClient}>CLIENTE</th>
                                 <th onClick={sortedByNote}>NOTA SOPHIA</th>
                                 <th onClick={sortByStatus}>STATUS</th>
                                 <th className='ac-thead'>ACTIONS</th>

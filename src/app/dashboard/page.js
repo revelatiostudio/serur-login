@@ -20,8 +20,8 @@ import trash from '../assets/trash.svg'
 
 export default function DashBoard() {
     const data = [
-        { id: 1, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "a", notaSophia: "30/100", status: "Em Andamento" },
-        { id: 2, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "70/100", status: "Concluído" },
+        { id: 1, numeroProcesso: "12345678910", dataSubmissao: "01/09/2024", cliente: "a", notaSophia: "30/100", status: "Em Andamento" },
+        { id: 2, numeroProcesso: "12345678910", dataSubmissao: "02/08/2024", cliente: "Banco Pan S.A.", notaSophia: "70/100", status: "Concluído" },
         { id: 3, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "100/100", status: "Erro" },
         { id: 4, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "72/100", status: "Em Andamento" },
         { id: 5, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "30/100", status: "Em Andamento" },
@@ -31,7 +31,7 @@ export default function DashBoard() {
         { id: 9, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "30/100", status: "Em Andamento" },
         { id: 10, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "70/100", status: "Concluído" },
         { id: 11, numeroProcesso: "987654321", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "100/100", status: "Erro" },
-        { id: 12, numeroProcesso: "10987654321", dataSubmissao: "01/08/2024", cliente: "zanco Pan S.A.", notaSophia: "72/100", status: "Em Andamento" },
+        { id: 12, numeroProcesso: "10987654321", dataSubmissao: "30/08/2024", cliente: "zanco Pan S.A.", notaSophia: "72/100", status: "Em Andamento" },
     ];
 
     const [name, setName] = useState("");
@@ -52,6 +52,8 @@ export default function DashBoard() {
     const [sortProcesso, setSortProcesso] = useState('ascending');
     const [sortStatus, setSortStatus] = useState('ascending');
     const [sortCliente, setSortCliente] = useState('ascending');
+    const [sortDate, setSortDate] = useState('ascending');
+
 
 
 
@@ -130,6 +132,15 @@ export default function DashBoard() {
         if (clientA > clientB) return sortCliente === 'ascending' ? 1 : -1;
         return 0; 
     })
+    const sortedDate = [...dadosFiltrados].sort((a,b) => {
+        const [diaA, mesA, anoA] = a.dataSubmissao.split('/');
+        const [diaB, mesB, anoB] = b.dataSubmissao.split('/');
+
+        const dataA = new Date(`${anoA}-${mesA}-${diaA}`);
+        const dataB = new Date(`${anoB}-${mesB}-${diaB}`);
+
+        return sortDate === 'ascending' ? dataA - dataB : dataB - dataA;
+    })
 
     function sortedByNote() {
         const direction = sortNote === 'ascending' ? 'descending' : 'ascending';
@@ -157,6 +168,11 @@ export default function DashBoard() {
         setSortCliente(direction);
         setSortCriteria('client');
     };
+    function sortByDate() {
+        const direction = sortDate === 'ascending' ? 'descending' : 'ascending';
+        setSortDate(direction);
+        setSortCriteria('date');
+    };
 
     let dadosParaRenderizar = [...dadosFiltrados];
     const pagesFiltro = Math.ceil(dadosFiltrados.length / itemsPerPage);
@@ -175,6 +191,10 @@ export default function DashBoard() {
 
     }else if(sortCriteria === "client"){
         dadosParaRenderizar = sortedClient.slice(starIndex, endIndex);
+
+    }else if(sortCriteria === "date"){
+        dadosParaRenderizar = sortedDate.slice(starIndex, endIndex);
+
 
     }
     else {
@@ -236,7 +256,7 @@ export default function DashBoard() {
                             <tr>
                                 <th onClick={sortById}>ID</th>
                                 <th onClick={sortNProcesso}>NÚMERO PROCESSO</th>
-                                <th>DATA SUBMISSÃO</th>
+                                <th onClick={sortByDate}>DATA SUBMISSÃO</th>
                                 <th onClick={sortByClient}>CLIENTE</th>
                                 <th onClick={sortedByNote}>NOTA SOPHIA</th>
                                 <th onClick={sortByStatus}>STATUS</th>

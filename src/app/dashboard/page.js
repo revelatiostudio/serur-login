@@ -14,6 +14,10 @@ import seta from '../assets/setap.svg'
 import pen from '../assets/pen.svg'
 import star from '../assets/star.svg'
 import trash from '../assets/trash.svg'
+import setaCima from '../assets/Polygon 1.svg'
+import setaBaixo from '../assets/Polygon 2.svg'
+
+import Setas from '../components/Setas/index.js'
 
 
 
@@ -33,6 +37,15 @@ export default function DashBoard() {
         { id: 11, numeroProcesso: "987654321", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "100/100", status: "Erro" },
         { id: 12, numeroProcesso: "10987654321", dataSubmissao: "30/08/2024", cliente: "zanco Pan S.A.", notaSophia: "72/100", status: "Em Andamento" },
     ];
+    const cabecalho = [
+        { id: 1, campo: "ID", sortFunction: sortById },
+        { id: 2, campo: "NÚMERO PROCESSO", sortFunction:sortNProcesso },
+        { id: 3, campo: "DATA SUBMISSÃO", sortFunction: sortByDate},
+        { id: 4, campo: "CLIENTE", sortFunction:sortByClient },
+        { id: 5, campo: "NOTA SOPHIA", sortFunction: sortedByNote }, 
+        { id: 6, campo: "STATUS", sortFunction: sortByStatus },
+        { id: 7, campo: "ACTIONS" }
+    ]
 
     const [name, setName] = useState("");
 
@@ -53,6 +66,9 @@ export default function DashBoard() {
     const [sortStatus, setSortStatus] = useState('crescent');
     const [sortCliente, setSortCliente] = useState('crescent');
     const [sortDate, setSortDate] = useState('crescent');
+
+    const [direction, setDirection] = useState('');
+    const [activeColumn, setActiveColumn] = useState(null)
 
 
 
@@ -113,26 +129,26 @@ export default function DashBoard() {
 
     })
 
-    const sortNumProcesso = [...dadosFiltrados].sort((a,b) => {
+    const sortNumProcesso = [...dadosFiltrados].sort((a, b) => {
         return sortProcesso === 'crescent' ? a.numeroProcesso - b.numeroProcesso : b.numeroProcesso - a.numeroProcesso;
 
     })
 
-    const status = [...dadosFiltrados].sort((a,b) => {
+    const status = [...dadosFiltrados].sort((a, b) => {
         const statusA = a.status.toLocaleLowerCase();
         const statusB = b.status.toLocaleLowerCase();
         if (statusA < statusB) return sortStatus === 'crescent' ? -1 : 1;
         if (statusA > statusB) return sortStatus === 'crescent' ? 1 : -1;
-        return 0; 
+        return 0;
     })
-    const sortedClient = [...dadosFiltrados].sort((a,b) => {
+    const sortedClient = [...dadosFiltrados].sort((a, b) => {
         const clientA = a.cliente.toLocaleLowerCase();
         const clientB = b.cliente.toLocaleLowerCase();
         if (clientA < clientB) return sortCliente === 'crescent' ? -1 : 1;
         if (clientA > clientB) return sortCliente === 'crescent' ? 1 : -1;
-        return 0; 
+        return 0;
     })
-    const sortedDate = [...dadosFiltrados].sort((a,b) => {
+    const sortedDate = [...dadosFiltrados].sort((a, b) => {
         const [diaA, mesA, anoA] = a.dataSubmissao.split('/');
         const [diaB, mesB, anoB] = b.dataSubmissao.split('/');
 
@@ -146,32 +162,53 @@ export default function DashBoard() {
         const direction = sortNote === 'crescent' ? 'descending' : 'crescent';
         setSortNote(direction);
         setSortCriteria('nota');
+        setDirection(direction);
+        setActiveColumn(5)
+
 
     }
     function sortById() {
         const direction = sortDirection === 'crescent' ? 'descending' : 'crescent';
         setSortDirection(direction);
         setSortCriteria('id');
+        setDirection(direction);
+        setActiveColumn(1)
+
     };
     function sortNProcesso() {
         const direction = sortProcesso === 'crescent' ? 'descending' : 'crescent';
         setSortProcesso(direction);
         setSortCriteria('processo');
+        setDirection(direction);
+        setActiveColumn(2)
+
     };
     function sortByStatus() {
         const direction = sortStatus === 'crescent' ? 'descending' : 'crescent';
         setSortStatus(direction);
         setSortCriteria('status');
+        setDirection(direction);
+        setActiveColumn(6)
+
+
     };
     function sortByClient() {
         const direction = sortCliente === 'crescent' ? 'descending' : 'crescent';
         setSortCliente(direction);
         setSortCriteria('client');
+        setDirection(direction);
+        setActiveColumn(4)
+
+
     };
     function sortByDate() {
         const direction = sortDate === 'crescent' ? 'descending' : 'crescent';
         setSortDate(direction);
         setSortCriteria('date');
+        setDirection(direction);
+        setActiveColumn(3)
+
+
     };
 
     let dadosParaRenderizar = [...dadosFiltrados];
@@ -183,16 +220,16 @@ export default function DashBoard() {
     else if (sortCriteria === "nota") {
         dadosParaRenderizar = sortedNote.slice(starIndex, endIndex);
 
-    }else if(sortCriteria == "processo"){
+    } else if (sortCriteria == "processo") {
         dadosParaRenderizar = sortNumProcesso.slice(starIndex, endIndex);
 
-    }else if(sortCriteria === "status"){
+    } else if (sortCriteria === "status") {
         dadosParaRenderizar = status.slice(starIndex, endIndex);
 
-    }else if(sortCriteria === "client"){
+    } else if (sortCriteria === "client") {
         dadosParaRenderizar = sortedClient.slice(starIndex, endIndex);
 
-    }else if(sortCriteria === "date"){
+    } else if (sortCriteria === "date") {
         dadosParaRenderizar = sortedDate.slice(starIndex, endIndex);
 
 
@@ -253,14 +290,35 @@ export default function DashBoard() {
 
                     <table>
                         <thead>
-                            <tr>
-                                <th onClick={sortById}>ID</th>
-                                <th onClick={sortNProcesso}>NÚMERO PROCESSO</th>
+                            {/* <tr>
+                                <th onClick={sortById}>
+                                    <div className='content'>
+                                        ID
+                                        <Setas direction = {direction}/>
+                                    </div>
+                                </th>
+                                <th onClick={sortNProcesso}>
+                                    <div className='content'>
+                                        NÚMERO PROCESSO 
+                                        <Setas direction = {direction}/>
+                                    </div>
+                                </th>
                                 <th onClick={sortByDate}>DATA SUBMISSÃO</th>
                                 <th onClick={sortByClient}>CLIENTE</th>
                                 <th onClick={sortedByNote}>NOTA SOPHIA</th>
                                 <th onClick={sortByStatus}>STATUS</th>
                                 <th className='ac-thead'>ACTIONS</th>
+                            </tr> */}
+                            <tr>
+                                {cabecalho.map((item) => (
+                                    console.log(item.id),
+                                    <th onClick={item.sortFunction}>
+                                        <div className='content'>
+                                            {item.campo}
+                                            <Setas direction={activeColumn === item.id ? direction : null} />
+                                        </div>
+                                    </th>
+                                ))}
                             </tr>
                         </thead>
                         <tbody>
@@ -310,7 +368,6 @@ export default function DashBoard() {
 
 
             </div>
-
 
 
 

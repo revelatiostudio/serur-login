@@ -14,8 +14,6 @@ import seta from '../assets/setap.svg'
 import pen from '../assets/pen.svg'
 import star from '../assets/star.svg'
 import trash from '../assets/trash.svg'
-import setaCima from '../assets/Polygon 1.svg'
-import setaBaixo from '../assets/Polygon 2.svg'
 
 import Setas from '../components/Setas/index.js'
 
@@ -311,7 +309,6 @@ export default function DashBoard() {
                             </tr> */}
                             <tr>
                                 {cabecalho.map((item) => (
-                                    console.log(item.id),
                                     <th onClick={item.sortFunction}>
                                         <div className='content'>
                                             {item.campo}

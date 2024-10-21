@@ -47,12 +47,12 @@ export default function DashBoard() {
     const endIndex = starIndex + itemsPerPage;
     const currentItens = data.slice(starIndex, endIndex);
 
-    const [sortDirection, setSortDirection] = useState('ascending');
-    const [sortNote, setSortNote] = useState('ascending');
-    const [sortProcesso, setSortProcesso] = useState('ascending');
-    const [sortStatus, setSortStatus] = useState('ascending');
-    const [sortCliente, setSortCliente] = useState('ascending');
-    const [sortDate, setSortDate] = useState('ascending');
+    const [sortDirection, setSortDirection] = useState('crescent');
+    const [sortNote, setSortNote] = useState('crescent');
+    const [sortProcesso, setSortProcesso] = useState('crescent');
+    const [sortStatus, setSortStatus] = useState('crescent');
+    const [sortCliente, setSortCliente] = useState('crescent');
+    const [sortDate, setSortDate] = useState('crescent');
 
 
 
@@ -102,34 +102,34 @@ export default function DashBoard() {
     // const pagesFiltro = Math.ceil(dadosFiltrados.length / itemsPerPage) 
 
     const sortedId = [...dadosFiltrados].sort((a, b) => {
-        return sortDirection === 'ascending' ? a.id - b.id : b.id - a.id;
+        return sortDirection === 'crescent' ? a.id - b.id : b.id - a.id;
     });
 
 
     const sortedNote = [...dadosFiltrados].sort((a, b) => {
         const sophiaA = a.notaSophia.split('/')[0];
         const sophiaB = b.notaSophia.split('/')[0];
-        return sortNote === 'ascending' ? sophiaA - sophiaB : sophiaB - sophiaA;
+        return sortNote === 'crescent' ? sophiaA - sophiaB : sophiaB - sophiaA;
 
     })
 
     const sortNumProcesso = [...dadosFiltrados].sort((a,b) => {
-        return sortProcesso === 'ascending' ? a.numeroProcesso - b.numeroProcesso : b.numeroProcesso - a.numeroProcesso;
+        return sortProcesso === 'crescent' ? a.numeroProcesso - b.numeroProcesso : b.numeroProcesso - a.numeroProcesso;
 
     })
 
     const status = [...dadosFiltrados].sort((a,b) => {
         const statusA = a.status.toLocaleLowerCase();
         const statusB = b.status.toLocaleLowerCase();
-        if (statusA < statusB) return sortStatus === 'ascending' ? -1 : 1;
-        if (statusA > statusB) return sortStatus === 'ascending' ? 1 : -1;
+        if (statusA < statusB) return sortStatus === 'crescent' ? -1 : 1;
+        if (statusA > statusB) return sortStatus === 'crescent' ? 1 : -1;
         return 0; 
     })
     const sortedClient = [...dadosFiltrados].sort((a,b) => {
         const clientA = a.cliente.toLocaleLowerCase();
         const clientB = b.cliente.toLocaleLowerCase();
-        if (clientA < clientB) return sortCliente === 'ascending' ? -1 : 1;
-        if (clientA > clientB) return sortCliente === 'ascending' ? 1 : -1;
+        if (clientA < clientB) return sortCliente === 'crescent' ? -1 : 1;
+        if (clientA > clientB) return sortCliente === 'crescent' ? 1 : -1;
         return 0; 
     })
     const sortedDate = [...dadosFiltrados].sort((a,b) => {
@@ -139,37 +139,37 @@ export default function DashBoard() {
         const dataA = new Date(`${anoA}-${mesA}-${diaA}`);
         const dataB = new Date(`${anoB}-${mesB}-${diaB}`);
 
-        return sortDate === 'ascending' ? dataA - dataB : dataB - dataA;
+        return sortDate === 'crescent' ? dataA - dataB : dataB - dataA;
     })
 
     function sortedByNote() {
-        const direction = sortNote === 'ascending' ? 'descending' : 'ascending';
+        const direction = sortNote === 'crescent' ? 'descending' : 'crescent';
         setSortNote(direction);
         setSortCriteria('nota');
 
     }
     function sortById() {
-        const direction = sortDirection === 'ascending' ? 'descending' : 'ascending';
+        const direction = sortDirection === 'crescent' ? 'descending' : 'crescent';
         setSortDirection(direction);
         setSortCriteria('id');
     };
     function sortNProcesso() {
-        const direction = sortProcesso === 'ascending' ? 'descending' : 'ascending';
+        const direction = sortProcesso === 'crescent' ? 'descending' : 'crescent';
         setSortProcesso(direction);
         setSortCriteria('processo');
     };
     function sortByStatus() {
-        const direction = sortStatus === 'ascending' ? 'descending' : 'ascending';
+        const direction = sortStatus === 'crescent' ? 'descending' : 'crescent';
         setSortStatus(direction);
         setSortCriteria('status');
     };
     function sortByClient() {
-        const direction = sortCliente === 'ascending' ? 'descending' : 'ascending';
+        const direction = sortCliente === 'crescent' ? 'descending' : 'crescent';
         setSortCliente(direction);
         setSortCriteria('client');
     };
     function sortByDate() {
-        const direction = sortDate === 'ascending' ? 'descending' : 'ascending';
+        const direction = sortDate === 'crescent' ? 'descending' : 'crescent';
         setSortDate(direction);
         setSortCriteria('date');
     };

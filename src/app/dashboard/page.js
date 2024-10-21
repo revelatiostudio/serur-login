@@ -47,6 +47,8 @@ export default function DashBoard() {
     const endIndex = starIndex + itemsPerPage;
     const currentItens = data.slice(starIndex, endIndex);
 
+    const [sortDirection, setSortDirection] = useState('ascending');
+
     function proxPagina() {
         if (currentPage >= pagesFiltro - 1) {
             return
@@ -83,9 +85,24 @@ export default function DashBoard() {
             item.status.toLowerCase().includes(filtroUnico.toLowerCase())
         );
     });
-    const filtrados = dadosFiltrados.slice(starIndex, endIndex)
-    const dadosParaRenderizar = filtroUnico ? filtrados : currentItens;
-    const pagesFiltro = Math.ceil(dadosFiltrados.length / itemsPerPage) 
+
+
+    // const filtrados = dadosFiltrados.slice(starIndex, endIndex)
+    // const dadosParaRenderizar = filtroUnico ? filtrados : currentItens;
+    // const pagesFiltro = Math.ceil(dadosFiltrados.length / itemsPerPage) 
+
+    const sortedData = [...dadosFiltrados].sort((a, b) => {
+        return sortDirection === 'ascending' ? a.id - b.id : b.id - a.id;
+    });
+
+    const dadosParaRenderizar = sortedData.slice(starIndex, endIndex);
+
+    const pagesFiltro = Math.ceil(dadosFiltrados.length / itemsPerPage);
+
+    function sortById() {
+        const direction = sortDirection === 'ascending' ? 'descending' : 'ascending';
+        setSortDirection(direction);
+    };
 
     return (
         <section className='container-dash'>
@@ -137,7 +154,7 @@ export default function DashBoard() {
                     <table>
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th onClick={sortById}>ID</th>
                                 <th>NÚMERO PROCESSO</th>
                                 <th>DATA SUBMISSÃO</th>
                                 <th>CLIENTE</th>

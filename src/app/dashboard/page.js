@@ -48,7 +48,7 @@ export default function DashBoard() {
     const currentItens = data.slice(starIndex, endIndex);
 
     function proxPagina() {
-        if (currentPage >= pages - 1) {
+        if (currentPage >= pagesFiltro - 1) {
             return
         } else {
             setCurrentPage(currentPage + 1)
@@ -73,10 +73,6 @@ export default function DashBoard() {
 
     }, [])
 
-    useEffect(() => {
-        console.log(filtroUnico)
-        console.log(dadosFiltrados)
-    })
 
     const dadosFiltrados = data.filter((item) => {
         return (
@@ -89,6 +85,7 @@ export default function DashBoard() {
     });
     const filtrados = dadosFiltrados.slice(starIndex, endIndex)
     const dadosParaRenderizar = filtroUnico ? filtrados : currentItens;
+    const pagesFiltro = Math.ceil(dadosFiltrados.length / itemsPerPage) 
 
     return (
         <section className='container-dash'>
@@ -182,7 +179,7 @@ export default function DashBoard() {
                         <div className="flex items-center gap-x-1">
                             <span className="min-h-[38px] min-w-[38px] flex justify-center items-center border border-gray-100 text-gray-800 py-2 px-3 text-sm rounded-lg focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-300 dark:text-black dark:focus:bg-black/10">{currentPage + 1}</span>
                             <span className="min-h-[38px] flex justify-center items-center text-gray-500 py-2 px-1.5 text-sm dark:text-neutral-500">of</span>
-                            <span className="min-h-[38px] flex justify-center items-center text-gray-500 py-2 px-1.5 text-sm dark:text-neutral-500">{pages}</span>
+                            <span className="min-h-[38px] flex justify-center items-center text-gray-500 py-2 px-1.5 text-sm dark:text-neutral-500">{pagesFiltro}</span>
                         </div>
                         <button onClick={proxPagina} type="button" className="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-2 text-sm rounded-lg text-gray-800 hover:bg-gray-800 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-gray-200 dark:focus:bg-white/10" aria-label="Next">
                             <span className="sr-only">Next</span>

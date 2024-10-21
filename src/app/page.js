@@ -19,7 +19,7 @@ import { esqueciSenha } from './services/serviceEsqueciSenha.js'
 
 import { useRouter } from 'next/navigation';
 
-import Cookies from 'js-cookie'
+import Cookies from 'js-cookie';
 
 export default function Home() {
   const router = useRouter()

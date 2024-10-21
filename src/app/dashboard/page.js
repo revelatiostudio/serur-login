@@ -49,7 +49,8 @@ export default function DashBoard() {
 
     const [sortDirection, setSortDirection] = useState('ascending');
     const [sortNote, setSortNote] = useState('ascending');
-    const [sortProcesso, setSortProcesso] = useState('ascending')
+    const [sortProcesso, setSortProcesso] = useState('ascending');
+    const [sortStatus, setSortStatus] = useState('ascending');
 
 
 
@@ -114,6 +115,14 @@ export default function DashBoard() {
 
     })
 
+    const status = [...dadosFiltrados].sort((a,b) => {
+        const statusA = a.status.toLocaleLowerCase();
+        const statusB = b.status.toLocaleLowerCase();
+        if (statusA < statusB) return sortStatus === 'ascending' ? -1 : 1;
+        if (statusA > statusB) return sortStatus === 'ascending' ? 1 : -1;
+        return 0; 
+    })
+
     function sortedByNote() {
         const direction = sortNote === 'ascending' ? 'descending' : 'ascending';
         setSortNote(direction);
@@ -130,6 +139,11 @@ export default function DashBoard() {
         setSortProcesso(direction);
         setSortCriteria('processo');
     };
+    function sortByStatus() {
+        const direction = sortStatus === 'ascending' ? 'descending' : 'ascending';
+        setSortStatus(direction);
+        setSortCriteria('status');
+    };
 
     let dadosParaRenderizar = [...dadosFiltrados];
     const pagesFiltro = Math.ceil(dadosFiltrados.length / itemsPerPage);
@@ -142,6 +156,9 @@ export default function DashBoard() {
 
     }else if(sortCriteria == "processo"){
         dadosParaRenderizar = sortNumProcesso.slice(starIndex, endIndex);
+
+    }else if(sortCriteria === "status"){
+        dadosParaRenderizar = status.slice(starIndex, endIndex);
 
     }
     else {
@@ -206,7 +223,7 @@ export default function DashBoard() {
                                 <th>DATA SUBMISSÃO</th>
                                 <th>CLIENTE</th>
                                 <th onClick={sortedByNote}>NOTA SOPHIA</th>
-                                <th>STATUS</th>
+                                <th onClick={sortByStatus}>STATUS</th>
                                 <th className='ac-thead'>ACTIONS</th>
                             </tr>
                         </thead>

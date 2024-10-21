@@ -48,6 +48,10 @@ export default function DashBoard() {
     const currentItens = data.slice(starIndex, endIndex);
 
     const [sortDirection, setSortDirection] = useState('ascending');
+    const [sortNote, setSortNote] = useState('ascending');
+
+    const [renderiza, setRenderiza] = useState([]);
+    const [sortCriteria, setSortCriteria] = useState('id');
 
     function proxPagina() {
         if (currentPage >= pagesFiltro - 1) {
@@ -91,17 +95,49 @@ export default function DashBoard() {
     // const dadosParaRenderizar = filtroUnico ? filtrados : currentItens;
     // const pagesFiltro = Math.ceil(dadosFiltrados.length / itemsPerPage) 
 
-    const sortedData = [...dadosFiltrados].sort((a, b) => {
+    const sortedId = [...dadosFiltrados].sort((a, b) => {
         return sortDirection === 'ascending' ? a.id - b.id : b.id - a.id;
     });
 
-    const dadosParaRenderizar = sortedData.slice(starIndex, endIndex);
+    
+        const sortedNote = [...dadosFiltrados].sort((a, b) => {
+            const sophiaA = a.notaSophia.split('/')[0];
+            const sophiaB = b.notaSophia.split('/')[0];
+            return sortNote === 'ascending' ? sophiaA - sophiaB : sophiaB - sophiaA;
+            
+        })
+
+        function sortedByNote(){
+            const direction = sortNote === 'ascending' ? 'descending' : 'ascending';
+            setSortNote(direction);
+            setSortCriteria('nota');
+
+        }
+
+        let dadosParaRenderizar = [...dadosFiltrados];
+        
+        if(sortCriteria === "id"){
+            dadosParaRenderizar = sortedId.slice(starIndex, endIndex);
+        }
+        else if(sortCriteria === "nota"){
+            dadosParaRenderizar = sortedNote.slice(starIndex, endIndex);
+        }
+        else{
+            dadosParaRenderizar = filtroUnico ? filtrados : currentItens;
+        }
+    
+
+
+     
+
+    
 
     const pagesFiltro = Math.ceil(dadosFiltrados.length / itemsPerPage);
 
     function sortById() {
         const direction = sortDirection === 'ascending' ? 'descending' : 'ascending';
         setSortDirection(direction);
+        setSortCriteria('id');
     };
 
     return (
@@ -158,7 +194,7 @@ export default function DashBoard() {
                                 <th>NÚMERO PROCESSO</th>
                                 <th>DATA SUBMISSÃO</th>
                                 <th>CLIENTE</th>
-                                <th>NOTA SOPHIA</th>
+                                <th onClick={sortedByNote}>NOTA SOPHIA</th>
                                 <th>STATUS</th>
                                 <th className='ac-thead'>ACTIONS</th>
                             </tr>

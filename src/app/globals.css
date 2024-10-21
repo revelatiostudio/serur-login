@@ -7,7 +7,10 @@
   padding: 0;
   box-sizing: border-box;
   text-decoration: none;
-
+}
+html,body{
+  background-color: var( --color-gray);
+  overflow: hidden;
 }
 /* .grid-global{
   width: 100%;
@@ -17,6 +20,11 @@
   position: relative;
 } */
 
+.container-dash{
+  width: 100%;
+  max-width: 92.6875rem;
+  margin: 0 auto;
+}
 :root{
   --color-black: #000000;
   --color-gray: #151515;
@@ -25,6 +33,10 @@
   --color-verde-medio: #ACCA4A;
   --color-verde-escuro: #8EA055;
   --color-white: #FFF;
+  --color-white-table: #F6F6F6;
+  --color-gray-200: #D8DCDF;
+  --color-gray-700:#49535B;
+  --color-gray-950:#13131A;
 }
 a{
   cursor: pointer;

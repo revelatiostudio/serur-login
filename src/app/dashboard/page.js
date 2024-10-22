@@ -301,7 +301,7 @@ export default function DashBoard() {
                             </tr> */}
                             <tr>
                                 {cabecalho.map((item) => (
-                                    <th onClick={item.sortFunction}>
+                                    <th onClick={item.sortFunction} key={item.id}>
                                         <div className='content'>
                                             {item.campo}
                                             <Setas direction={activeColumn === item.id ? direction : null} />

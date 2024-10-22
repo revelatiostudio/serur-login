@@ -100,14 +100,14 @@ export default function NewDash() {
                 </div>
                 <div className='max-w-sm w-[321px]'>
                   <label className="block text-medium font-medium mb-2 dark:text-black flex items-center ">Cliente <Image src={info} width={15} height={15} className="ml-2" alt=''/></label>
-                  <select ref={cliente} id="hs-select-label" className=" max-w-sm py-3 px-4 pe-9 block w-full custom-border rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-white dark:border-neutral-700 dark:text-black dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                  <select required ref={cliente} id="hs-select-label" className=" max-w-sm py-3 px-4 pe-9 block w-full custom-border rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-white dark:border-neutral-700 dark:text-black dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                     <option defaultValue="">Cliente</option>
                     <option>Banco Pan</option>
                   </select>
                 </div>
                 <div className='max-w-sm w-[321px]'>
                   <label className="block text-medium font-medium mb-2 dark:text-black flex items-center">Laudo <Image src={info} width={15} height={15} className="ml-2" alt=''/></label>
-                  <select ref={laudo} id="hs-select-label" className=" max-w-sm py-3 px-4 pe-9 block w-full custom-border rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-white dark:border-neutral-700 dark:text-black dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                  <select required ref={laudo} id="hs-select-label" className=" max-w-sm py-3 px-4 pe-9 block w-full custom-border rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-white dark:border-neutral-700 dark:text-black dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                     <option defaultValue="">Laudo</option>
                     <option>CSV</option>
                     <option>2</option>
@@ -121,7 +121,7 @@ export default function NewDash() {
                 <div className="max-w-sm w-[321px]">
                   <label htmlFor="input-label" className="block text-medium font-medium mb-2 dark:text-black flex items-center">Arquivo Laudo <Image src={info} width={15} height={15} className="ml-2" alt=''/></label>
                   <label htmlFor="file-input" className="sr-only">Choose file </label>
-                  <input ref={arqLaudo} type="file" name="file-input" id="file-input" className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none
+                  <input required ref={arqLaudo} type="file" name="file-input" id="file-input" className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none
                   file:bg-gray-50 file:border-0
                   file:me-4
                    file:py-3 file:px-4"/>
@@ -129,7 +129,7 @@ export default function NewDash() {
                 <div className="max-w-sm w-[321px]">
                   <label htmlFor="input-label" className="block text-medium font-medium mb-2 dark:text-black flex items-center">Inícial <Image src={info} width={15} height={15} className="ml-2" alt=''/></label>
                   <label htmlFor="file-input" className="sr-only">Choose file</label>
-                  <input ref={inicial} type="file" name="file-input" id="file-input" className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none
+                  <input required ref={inicial} type="file" name="file-input" id="file-input" className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none
                   file:bg-gray-50 file:border-0
                   file:me-4
                    file:py-3 file:px-4"/>
@@ -137,7 +137,7 @@ export default function NewDash() {
                 <div className="max-w-sm w-[321px]">
                   <label htmlFor="input-label" className="block text-medium font-medium mb-2 dark:text-black flex items-center">Contestação <Image src={info} width={15} height={15} className="ml-2" alt=''/></label>
                   <label htmlFor="file-input" className="sr-only">Choose file</label>
-                  <input ref={contestacao} type="file" name="file-input" id="file-input" className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none
+                  <input required ref={contestacao} type="file" name="file-input" id="file-input" className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none
                   file:bg-gray-50 file:border-0
                   file:me-4
                    file:py-3 file:px-4"/>

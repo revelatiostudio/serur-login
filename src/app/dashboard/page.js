@@ -14,7 +14,7 @@ import seta from '../assets/setap.svg'
 import pen from '../assets/pen.svg'
 import star from '../assets/star.svg'
 import trash from '../assets/trash.svg'
-
+import lupa from '../assets/search.svg'
 import Setas from '../components/Setas/index.js'
 
 
@@ -281,7 +281,7 @@ export default function DashBoard() {
             <div className='sec-dashboard'>
                 <div className='dashboard'>
                     <div className='filter'>
-                        <input type='text' placeholder="🔍 Analises Sophia" value={filtroUnico} onChange={(e) => setFiltroUnico(e.target.value)} />
+                        <input type='text' placeholder="Analises Sophia" value={filtroUnico} onChange={(e) => setFiltroUnico(e.target.value)} />
                         <button>+ Adicionar</button>
 
                     </div>

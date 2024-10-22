@@ -71,12 +71,14 @@
     background-color: var( --color-white-table);
     border-radius: 8px;
     margin-top: 38px;
+    border: 1px #B5BEC4 solid;
     
 }
 .filter{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 .filter input{
     width: 100%;
@@ -85,7 +87,19 @@
     border-radius: 10px;
     margin: 21px;
     border: 1px var(--color-gray-200) solid;
+    padding-left: 50px;
+    
 }
+
+.filter::before {
+    content: url('../assets/search.svg'); 
+    position: absolute;
+    left: 40px;
+    top: 47%;
+    transform: translateY(-50%);
+    width: 16px; 
+    height: 16px;
+  }
 .filter button{
     width: 200px;
     height: 50px;
@@ -120,6 +134,7 @@ th{
     text-align: left;
     background-color: #f2f2f2;
     position: relative;
+    cursor: pointer;
 }
 th .content{
     display: flex;

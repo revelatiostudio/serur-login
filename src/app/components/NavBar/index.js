@@ -7,8 +7,14 @@ import logoutsvg from '../../assets/log-out.svg'
 
 import Image from 'next/image'
 
+import { useRouter } from 'next/navigation';
+
+import Cookies from 'js-cookie';
+
 
 export default function NavBar() {
+    const router = useRouter();
+
     const [logout, setLogout] = useState(false);
     function atualizaLogout(){
         if(logout === false){
@@ -16,6 +22,12 @@ export default function NavBar() {
         }else{
             setLogout(false)
         }
+
+    }
+
+    function removeLogin(){
+       Cookies.remove('token', { path: '' });
+       router.push('/')
 
     }
     return (
@@ -38,7 +50,7 @@ export default function NavBar() {
                             </svg>
                         </span>
 
-                        <div className={logout === false ? 'logout' : 'logout disable'} >
+                        <div className={logout === false ? 'logout' : 'logout disable'} onClick={removeLogin} >
                             <Image src={logoutsvg} width={14} height={14} alt=''/>
                             <p>Logout</p>
                         </div>

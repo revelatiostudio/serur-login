@@ -1,0 +1,7 @@
+.header-dash{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    color: var(--color-white);
+    margin-top: 38px;
+}

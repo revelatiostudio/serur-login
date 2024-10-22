@@ -3,12 +3,13 @@ import React, { useEffect, useState } from 'react';
 import './dashboard.css';
 import Cookies from 'js-cookie'
 
+import NavBar from '../components/NavBar/index.js'
+
 import { jwtDecode } from "jwt-decode";
 
 
 import Image from 'next/image'
 
-import sophiaLogo from '../assets/sophiaLogo.svg'
 import frame from '../assets/frame-welcome.png'
 import seta from '../assets/setap.svg'
 import pen from '../assets/pen.svg'
@@ -16,6 +17,7 @@ import star from '../assets/star.svg'
 import trash from '../assets/trash.svg'
 import lupa from '../assets/search.svg'
 import Setas from '../components/Setas/index.js'
+import { useRouter } from 'next/navigation';
 
 
 
@@ -45,6 +47,7 @@ export default function DashBoard() {
         { id: 7, campo: "ACTIONS" }
     ]
 
+    const router = useRouter()
     const [name, setName] = useState("");
 
     const [filtroUnico, setFiltroUnico] = useState('');
@@ -241,18 +244,7 @@ export default function DashBoard() {
 
     return (
         <section className='container-dash'>
-            <header>
-                <div className='header-dash'>
-                    <p>v1.0</p>
-                    <Image
-                        src={sophiaLogo}
-                        width={166}
-                        height={44}
-                        alt="sophia logo"
-                    />
-                    <p>avatar</p>
-                </div>
-            </header>
+            <NavBar/>
             <div className='welcome'>
                 <h1>Olá, {name}👋</h1>
 
@@ -282,7 +274,7 @@ export default function DashBoard() {
                 <div className='dashboard'>
                     <div className='filter'>
                         <input type='text' placeholder="Analises Sophia" value={filtroUnico} onChange={(e) => setFiltroUnico(e.target.value)} />
-                        <button>+ Adicionar</button>
+                        <button onClick={() => router.push('/dashboard/newdash')}>+ Adicionar</button>
 
                     </div>
 

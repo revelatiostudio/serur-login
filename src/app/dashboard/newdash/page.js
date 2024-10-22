@@ -1,7 +1,11 @@
 import React from 'react'
+import './newdash.css'
 
-export default function newDash() {
+export default function NewDash() {
   return (
-   <h1>Novo DashBoard</h1>
+    <section className='container-dash'>
+
+    </section>
+   
   )
 }

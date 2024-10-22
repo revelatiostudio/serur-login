@@ -12,6 +12,7 @@ module.exports = {
         background: "var(--background)",
         foreground: "var(--foreground)",
         customGray: "#27272A",
+        verde: "#C6F432"
       },
     },
   },

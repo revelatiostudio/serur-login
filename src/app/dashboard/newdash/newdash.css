@@ -79,7 +79,7 @@
     gap: 30px;
     margin-top: 40px;
 }
-button{
+.bottom-fields button{
     background-color: var(--color-black);
     color: var(--color-white);
     width: 100%;

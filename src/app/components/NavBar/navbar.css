@@ -4,4 +4,38 @@
     width: 100%;
     color: var(--color-white);
     margin-top: 38px;
+    position: relative;
+}
+.sec-logout{
+    text-align: end;
+    cursor: pointer;
+
+}
+.logout{
+    background-color: var(--color-white-table);
+    color: var(--color-gray-950);
+    width: 96px;
+    height: 45px;
+    text-align: center;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 0;
+    display: none;
+    cursor: pointer;
+    
+}
+
+.logout.disable{
+    display: flex;
+    cursor: pointer;
+
+}
+.logout p{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 142%;
+    padding-left: 10px;
 }

@@ -49,6 +49,7 @@
     border-radius: 15px;
     padding-left: 40px;
     margin-top: 51px;
+    position: relative;
 }
 
 .sec-info .text-info {
@@ -77,4 +78,15 @@
     display: flex;
     gap: 30px;
     margin-top: 40px;
+}
+button{
+    background-color: var(--color-black);
+    color: var(--color-white);
+    width: 100%;
+    max-width: 138px;
+    height: 48px;
+    border-radius: 15px;
+    position: absolute;
+    right: 420px;
+    bottom: 150px;
 }

@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useRef } from 'react'
 import './newdash.css'
 
 
@@ -14,6 +14,29 @@ import dots from '../../assets/dots.svg'
 
 export default function NewDash() {
   const router = useRouter();
+  const numProcesso = useRef();
+  const cliente = useRef();
+  const laudo = useRef();
+  const arqLaudo = useRef();
+  const inicial = useRef();
+  const contestacao = useRef();
+
+  function recebeDados(event) {
+    event.preventDefault();
+    const dadosProcesso = numProcesso.current.value;
+    const dadosCliente = cliente.current.value;
+    const dadosLaudo = laudo.current.value;
+    const dadosInicial = inicial.current.value;
+    const dadosContestacao = contestacao.current.value;
+    
+    console.log("dadosProcesso: ", dadosProcesso)
+    console.log("dadosCliente: ", dadosCliente)
+    console.log("dadosLaudo: ", dadosLaudo)
+    console.log("dadosInicial: ", dadosInicial)
+    console.log("dadosProcesso: ", dadosProcesso)
+    console.log("dadosContestacao: ", dadosContestacao)
+
+  }
   return (
     <section className='container-dash'>
       <div className='newdash'>
@@ -66,63 +89,69 @@ export default function NewDash() {
 
           </div>
 
-          <div className='sec-fields'>
-            <div className='top-fields'>
-              <div className="max-w-sm  w-[321px]">
-                <label htmlFor="input-label" className="block text-sm font-medium mb-2 dark:text-black">Número Processo</label>
-                <input type="email" id="input-label" className="py-3 px-4 block w-full custom-border rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-white dark:border-neutral-700 dark:text-neutral-800 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Número Processo" />
+
+          <form onSubmit={recebeDados}>
+            <div className='sec-fields'>
+              <div className='top-fields'>
+                <div className="max-w-sm  w-[321px]">
+                  <label htmlFor="input-label" className="block text-sm font-medium mb-2 dark:text-black">Número Processo</label>
+                  <input ref={numProcesso} type="text" id="input-label" className="py-3 px-4 block w-full custom-border rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-white dark:border-neutral-700 dark:text-neutral-800 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Número Processo" />
+                </div>
+                <div className='max-w-sm w-[321px]'>
+                  <label className="block text-sm font-medium mb-2 dark:text-black">Cliente</label>
+                  <select ref={cliente} id="hs-select-label" className=" max-w-sm py-3 px-4 pe-9 block w-full custom-border rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-white dark:border-neutral-700 dark:text-black dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                    <option defaultValue="">Cliente</option>
+                    <option>Banco Pan</option>
+                  </select>
+                </div>
+                <div className='max-w-sm w-[321px]'>
+                  <label className="block text-sm font-medium mb-2 dark:text-black">Laudo</label>
+                  <select ref={laudo} id="hs-select-label" className=" max-w-sm py-3 px-4 pe-9 block w-full custom-border rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-white dark:border-neutral-700 dark:text-black dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                    <option defaultValue="">Laudo</option>
+                    <option>CSV</option>
+                    <option>2</option>
+                    <option>3</option>
+                  </select>
+                </div>
+
               </div>
-              <div className='max-w-sm w-[321px]'>
-                <label className="block text-sm font-medium mb-2 dark:text-black">Cliente</label>
-                <select id="hs-select-label" className=" max-w-sm py-3 px-4 pe-9 block w-full custom-border rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-white dark:border-neutral-700 dark:text-black dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                  <option defaultValue="">Cliente</option>
-                  <option>Banco Pan</option>
-                </select>
+
+              <div className='bottom-fields'>
+                <div className="max-w-sm w-[321px]">
+                  <label htmlFor="input-label" className="block text-sm font-medium mb-2 dark:text-black">Arquivo Laudo</label>
+                  <label htmlFor="file-input" className="sr-only">Choose file</label>
+                  <input ref={arqLaudo} type="file" name="file-input" id="file-input" className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none
+                  file:bg-gray-50 file:border-0
+                  file:me-4
+                   file:py-3 file:px-4"/>
+                </div>
+                <div className="max-w-sm w-[321px]">
+                  <label htmlFor="input-label" className="block text-sm font-medium mb-2 dark:text-black">Inícial</label>
+                  <label htmlFor="file-input" className="sr-only">Choose file</label>
+                  <input ref={inicial} type="file" name="file-input" id="file-input" className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none
+                  file:bg-gray-50 file:border-0
+                  file:me-4
+                   file:py-3 file:px-4"/>
+                </div>
+                <div className="max-w-sm w-[321px]">
+                  <label htmlFor="input-label" className="block text-sm font-medium mb-2 dark:text-black">Contestação</label>
+                  <label htmlFor="file-input" className="sr-only">Choose file</label>
+                  <input ref={contestacao} type="file" name="file-input" id="file-input" className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none
+                  file:bg-gray-50 file:border-0
+                  file:me-4
+                   file:py-3 file:px-4"/>
+                </div>
+
+                <button>Enviar</button>
+
               </div>
-              <div className='max-w-sm w-[321px]'>
-                <label className="block text-sm font-medium mb-2 dark:text-black">Laudo</label>
-                <select id="hs-select-label" className=" max-w-sm py-3 px-4 pe-9 block w-full custom-border rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-white dark:border-neutral-700 dark:text-black dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                  <option defaultValue="">Laudo</option>
-                  <option>CSV</option>
-                  <option>2</option>
-                  <option>3</option>
-                </select>
-              </div>
+
+
+
 
             </div>
+          </form>
 
-            <div className='bottom-fields'>
-              <form className="max-w-sm w-[321px]">
-              <label htmlFor="input-label" className="block text-sm font-medium mb-2 dark:text-black">Arquivo Laudo</label>
-                <label htmlFor="file-input" className="sr-only">Choose file</label>
-                <input type="file" name="file-input" id="file-input" className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none
-                  file:bg-gray-50 file:border-0
-                  file:me-4
-                   file:py-3 file:px-4"/>
-              </form>
-              <form className="max-w-sm w-[321px]">
-              <label htmlFor="input-label" className="block text-sm font-medium mb-2 dark:text-black">Inícial</label>
-                <label htmlFor="file-input" className="sr-only">Choose file</label>
-                <input type="file" name="file-input" id="file-input" className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none
-                  file:bg-gray-50 file:border-0
-                  file:me-4
-                   file:py-3 file:px-4"/>
-              </form>
-              <form className="max-w-sm w-[321px]">
-              <label htmlFor="input-label" className="block text-sm font-medium mb-2 dark:text-black">Contestação</label>
-                <label htmlFor="file-input" className="sr-only">Choose file</label>
-                <input type="file" name="file-input" id="file-input" className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none
-                  file:bg-gray-50 file:border-0
-                  file:me-4
-                   file:py-3 file:px-4"/>
-              </form>
-
-            </div>
-
-
-
-
-          </div>
 
         </div>
 

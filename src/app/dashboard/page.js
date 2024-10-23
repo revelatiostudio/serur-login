@@ -19,30 +19,32 @@ import lupa from '../assets/search.svg'
 import Setas from '../components/Setas/index.js'
 import { useRouter } from 'next/navigation';
 
+import axios from 'axios';
+
 
 
 
 export default function DashBoard() {
-    const data = [
-        { id: 1, numeroProcesso: "12345678910", dataSubmissao: "01/09/2024", cliente: "a", notaSophia: "30/100", status: "Em Andamento" },
-        { id: 2, numeroProcesso: "12345678910", dataSubmissao: "02/08/2024", cliente: "Banco Pan S.A.", notaSophia: "70/100", status: "Concluído" },
-        { id: 3, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "100/100", status: "Erro" },
-        { id: 4, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "72/100", status: "Em Andamento" },
-        { id: 5, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "30/100", status: "Em Andamento" },
-        { id: 6, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "70/100", status: "Concluído" },
-        { id: 7, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "100/100", status: "Erro" },
-        { id: 8, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "72/100", status: "Em Andamento" },
-        { id: 9, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "30/100", status: "Em Andamento" },
-        { id: 10, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "70/100", status: "Concluído" },
-        { id: 11, numeroProcesso: "987654321", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "100/100", status: "Erro" },
-        { id: 12, numeroProcesso: "10987654321", dataSubmissao: "30/08/2024", cliente: "zanco Pan S.A.", notaSophia: "72/100", status: "Em Andamento" },
-    ];
+    // const data = [
+    //     { id: 1, numeroProcesso: "12345678910", dataSubmissao: "01/09/2024", cliente: "a", notaSophia: "30/100", status: "Em Andamento" },
+    //     { id: 2, numeroProcesso: "12345678910", dataSubmissao: "02/08/2024", cliente: "Banco Pan S.A.", notaSophia: "70/100", status: "Concluído" },
+    //     { id: 3, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "100/100", status: "Erro" },
+    //     { id: 4, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "72/100", status: "Em Andamento" },
+    //     { id: 5, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "30/100", status: "Em Andamento" },
+    //     { id: 6, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "70/100", status: "Concluído" },
+    //     { id: 7, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "100/100", status: "Erro" },
+    //     { id: 8, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "72/100", status: "Em Andamento" },
+    //     { id: 9, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "30/100", status: "Em Andamento" },
+    //     { id: 10, numeroProcesso: "12345678910", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "70/100", status: "Concluído" },
+    //     { id: 11, numeroProcesso: "987654321", dataSubmissao: "01/08/2024", cliente: "Banco Pan S.A.", notaSophia: "100/100", status: "Erro" },
+    //     { id: 12, numeroProcesso: "10987654321", dataSubmissao: "30/08/2024", cliente: "zanco Pan S.A.", notaSophia: "72/100", status: "Em Andamento" },
+    // ];
     const cabecalho = [
         { id: 1, campo: "ID", sortFunction: sortById },
-        { id: 2, campo: "NÚMERO PROCESSO", sortFunction:sortNProcesso },
-        { id: 3, campo: "DATA SUBMISSÃO", sortFunction: sortByDate},
-        { id: 4, campo: "CLIENTE", sortFunction:sortByClient },
-        { id: 5, campo: "NOTA SOPHIA", sortFunction: sortedByNote }, 
+        { id: 2, campo: "NÚMERO PROCESSO", sortFunction: sortNProcesso },
+        { id: 3, campo: "DATA SUBMISSÃO", sortFunction: sortByDate },
+        { id: 4, campo: "CLIENTE", sortFunction: sortByClient },
+        { id: 5, campo: "NOTA SOPHIA", sortFunction: sortedByNote },
         { id: 6, campo: "STATUS", sortFunction: sortByStatus },
         { id: 7, campo: "ACTIONS" }
     ]
@@ -55,11 +57,11 @@ export default function DashBoard() {
     const [currentPage, setCurrentPage] = useState(0);
     const itemsPerPage = 4;
 
-    const pages = Math.ceil(data.length / itemsPerPage);
+    //const pages = Math.ceil(data.length / itemsPerPage);
 
     const starIndex = currentPage * itemsPerPage;
     const endIndex = starIndex + itemsPerPage;
-    const currentItens = data.slice(starIndex, endIndex);
+    //const currentItens = data.slice(starIndex, endIndex);
 
     const [sortDirection, setSortDirection] = useState('crescent');
     const [sortNote, setSortNote] = useState('crescent');
@@ -69,7 +71,28 @@ export default function DashBoard() {
     const [sortDate, setSortDate] = useState('crescent');
 
     const [direction, setDirection] = useState('');
-    const [activeColumn, setActiveColumn] = useState(null)
+    const [activeColumn, setActiveColumn] = useState(null);
+
+    const [data, setDados] = useState([]);
+
+    useEffect(() => {
+        axios.get('https://serur-ia-sophia.vercel.app/api/process/list-process')
+            .then(response => {
+                const dadosAdaptados = response.data.processes.map((item, index) => ({
+                    id: index + 1,
+                    numeroProcesso: item.processNumber.toString(),
+                    dataSubmissao: new Date(item.createdAt).toLocaleDateString(),
+                    cliente: item.client,
+                    notaSophia: `${item.score}/100`,
+                    status: item.status,
+                }));
+                setDados(dadosAdaptados);
+
+            })
+            .catch(error => {
+                console.error('Erro ao carregar os dados', error);
+            });
+    }, []);
 
 
 
@@ -236,7 +259,7 @@ export default function DashBoard() {
 
     }
     else {
-        dadosParaRenderizar = filtroUnico ? filtrados : currentItens;
+        dadosParaRenderizar = filtroUnico ? filtrados : data;
     }
 
 
@@ -244,7 +267,7 @@ export default function DashBoard() {
 
     return (
         <section className='container-dash'>
-            <NavBar/>
+            <NavBar />
             <div className='welcome'>
                 <h1>Olá, {name}👋</h1>
 

@@ -38,7 +38,7 @@ export default function NewDash() {
     formData.append('fileLaudo', fileLaudo);
     formData.append('fileInicial', fileInicial);
     formData.append('fileContestacao', fileContestacao);
-    enviaCampos(dadosProcesso,dadosCliente,dadosLaudo)
+    //enviaCampos(dadosProcesso,dadosCliente,dadosLaudo)
     //enviaArquivos(formData, dadosProcesso)
     
 
@@ -62,14 +62,19 @@ export default function NewDash() {
   }
 
   async function enviaArquivos(formData, dadosProcesso){
+    console.log(formData.get("fileLaudo"))
     try {
       const response = await axios.post('https://serur-ia-sophia.vercel.app/api/process/upload',{
-        id: dadosProcesso,
-        initial: formData
+        id: Number(dadosProcesso),
+        initial: formData.get("fileLaudo"),
+        dispute: formData.get("fileContestacao")
 
       })
+
+      console.log(response.data.message)
       
     } catch (error) {
+      console.log(error)
       return alert(error.response.data.message);
 
     }

@@ -342,7 +342,9 @@ export default function DashBoard() {
                                         <td>{arq.numeroProcesso}</td>
                                         <td>{arq.dataSubmissao}</td>
                                         <td>{arq.cliente}</td>
-                                        <td>{arq.notaSophia}</td>
+                                        <td className={Number(arq.notaSophia.split('/')[0]) < 50 ? 'low' : Number(arq.notaSophia.split('/')[0]) <=70 ? 'medium' : 'high'}>
+                                        {arq.notaSophia}
+                                        </td>
                                         <td>{arq.status}</td>
                                         <td className='actions'>
                                             <button><Image src={pen} width={18} height={18} alt='caneta' /></button>

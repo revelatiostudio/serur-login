@@ -25,7 +25,7 @@ export default function NewDash() {
   const arqInicial = useRef();
   const arqContestacao = useRef();
 
-  function recebeDados(event) {
+  async function recebeDados(event) {
     event.preventDefault();
     const dadosProcesso = numProcesso.current.value;
     const dadosCliente = cliente.current.value;
@@ -33,48 +33,65 @@ export default function NewDash() {
     const fileLaudo = arqLaudo.current.files[0]
     const fileInicial = arqInicial.current.files[0];
     const fileContestacao = arqContestacao.current.files[0];
-
+    const reader = new FileReader();
     const formData = new FormData();
     formData.append('fileLaudo', fileLaudo);
-    formData.append('fileInicial', fileInicial);
-    formData.append('fileContestacao', fileContestacao);
-    //enviaCampos(dadosProcesso,dadosCliente,dadosLaudo)
-    //enviaArquivos(formData, dadosProcesso)
-    
+    formData.append('initial', fileInicial);
+    formData.append('dispute', fileContestacao);
+    const idProcesso = await enviaCampos(dadosProcesso, dadosCliente, dadosLaudo)
+    enviaArquivos(idProcesso,fileInicial, fileContestacao)
+    window.location.reload()
+    // reader.onload = (e) => {
+    //   const fileContent = e.target.result;
+    //   console.log("Conteúdo do arquivo:", fileContent);
+
+    // };
+
+    // reader.onerror = (error) => {
+    //   console.error("Erro ao ler o arquivo:", error);
+    // };
+
+    // reader.readAsText(formData.get('initial'));
+
+
 
   }
-  async function enviaCampos(dadosProcesso,dadosCliente,dadosLaudo) {
+  
+  async function enviaCampos(dadosProcesso, dadosCliente, dadosLaudo) {
     try {
-      const response = await axios.post('https://serur-ia-sophia.vercel.app/api/process/create',{
+      const response = await axios.post('https://serur-ia-sophia.vercel.app/api/process/create', {
         processNumber: Number(dadosProcesso),
         client: dadosCliente,
-        reportType : dadosLaudo
+        reportType: dadosLaudo
 
       })
-
-      return alert(response.data.message)
+      alert(response.data.message);
+      return response.data.process._id
 
     } catch (error) {
       return alert(error.response.data.message);
-      
+
     }
-    
+
   }
 
-  async function enviaArquivos(formData, dadosProcesso){
-    console.log(formData.get("fileLaudo"))
+  async function enviaArquivos(idProcesso,fileInicial, fileContestacao) {
+
     try {
+
       const response = await axios.post('https://serur-ia-sophia.vercel.app/api/process/upload',{
-        id: Number(dadosProcesso),
-        initial: formData.get("fileLaudo"),
-        dispute: formData.get("fileContestacao")
+        id: idProcesso,
+        initial: fileInicial,
+        dispute: fileContestacao
 
-      })
+      },{
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        }
+      });
 
-      console.log(response.data.message)
-      
+
     } catch (error) {
-      console.log(error)
       return alert(error.response.data.message);
 
     }
@@ -141,14 +158,14 @@ export default function NewDash() {
                   <input ref={numProcesso} type="text" id="input-label" className="py-3 px-4 block w-full custom-border rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-white dark:border-neutral-700 dark:text-neutral-800 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Número Processo" />
                 </div>
                 <div className='max-w-sm w-[321px]'>
-                  <label className="block text-medium font-medium mb-2 dark:text-black flex items-center ">Cliente <Image src={info} width={15} height={15} className="ml-2" alt=''/></label>
+                  <label className="block text-medium font-medium mb-2 dark:text-black flex items-center ">Cliente <Image src={info} width={15} height={15} className="ml-2" alt='' /></label>
                   <select required ref={cliente} id="hs-select-label" className=" max-w-sm py-3 px-4 pe-9 block w-full custom-border rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-white dark:border-neutral-700 dark:text-black dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                     <option defaultValue="">Cliente</option>
                     <option>Banco Pan</option>
                   </select>
                 </div>
                 <div className='max-w-sm w-[321px]'>
-                  <label className="block text-medium font-medium mb-2 dark:text-black flex items-center">Laudo <Image src={info} width={15} height={15} className="ml-2" alt=''/></label>
+                  <label className="block text-medium font-medium mb-2 dark:text-black flex items-center">Laudo <Image src={info} width={15} height={15} className="ml-2" alt='' /></label>
                   <select required ref={laudo} id="hs-select-label" className=" max-w-sm py-3 px-4 pe-9 block w-full custom-border rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-white dark:border-neutral-700 dark:text-black dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                     <option defaultValue="">CSV</option>
                     <option>Manual</option>
@@ -159,25 +176,25 @@ export default function NewDash() {
 
               <div className='bottom-fields'>
                 <div className="max-w-sm w-[321px]">
-                  <label htmlFor="input-label" className="block text-medium font-medium mb-2 dark:text-black flex items-center">Arquivo Laudo <Image src={info} width={15} height={15} className="ml-2" alt=''/></label>
+                  <label htmlFor="input-label" className="block text-medium font-medium mb-2 dark:text-black flex items-center">Arquivo Laudo <Image src={info} width={15} height={15} className="ml-2" alt='' /></label>
                   <label htmlFor="file-input" className="sr-only">Choose file </label>
-                  <input required ref={arqLaudo} type="file" name="file-input" id="file-input" className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none
+                  <input required ref={arqLaudo} type="file" name="arqLaudo" id="file-input" className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none
                   file:bg-gray-50 file:border-0
                   file:me-4
                    file:py-3 file:px-4"/>
                 </div>
                 <div className="max-w-sm w-[321px]">
-                  <label htmlFor="input-label" className="block text-medium font-medium mb-2 dark:text-black flex items-center">Inícial <Image src={info} width={15} height={15} className="ml-2" alt=''/></label>
+                  <label htmlFor="input-label" className="block text-medium font-medium mb-2 dark:text-black flex items-center">Inícial <Image src={info} width={15} height={15} className="ml-2" alt='' /></label>
                   <label htmlFor="file-input" className="sr-only">Choose file</label>
-                  <input required ref={arqInicial} type="file" name="file-input" id="file-input" className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none
+                  <input required ref={arqInicial} type="file" name="arqInicial" id="file-input" className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none
                   file:bg-gray-50 file:border-0
                   file:me-4
                    file:py-3 file:px-4"/>
                 </div>
                 <div className="max-w-sm w-[321px]">
-                  <label htmlFor="input-label" className="block text-medium font-medium mb-2 dark:text-black flex items-center">Contestação <Image src={info} width={15} height={15} className="ml-2" alt=''/></label>
+                  <label htmlFor="input-label" className="block text-medium font-medium mb-2 dark:text-black flex items-center">Contestação <Image src={info} width={15} height={15} className="ml-2" alt='' /></label>
                   <label htmlFor="file-input" className="sr-only">Choose file</label>
-                  <input required ref={arqContestacao} type="file" name="file-input" id="file-input" className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none
+                  <input required ref={arqContestacao} type="file" name="arqContestacao" id="file-input" className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none
                   file:bg-gray-50 file:border-0
                   file:me-4
                    file:py-3 file:px-4"/>
